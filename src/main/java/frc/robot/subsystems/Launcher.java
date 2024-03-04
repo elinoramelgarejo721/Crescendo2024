@@ -44,6 +44,10 @@ public class Launcher extends SubsystemBase {
     launcher.set(0.5);
   }
 
+  public void RunAmp_SlidesDown() {
+    launcher.set(0.9);
+  }
+
   public void RunSpeaker() {
     launcher.set(1);
   }

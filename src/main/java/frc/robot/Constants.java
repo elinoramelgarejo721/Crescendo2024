@@ -115,7 +115,7 @@ public final class Constants {
 
     public static final double drive_kP  = 0.1;
     public static final double drive_kI  = 0.0;
-    public static final double drive_kD  = 0.0;
+    public static final double drive_kD  = 0.121;
     public static final double drive_kFF = 0.0;
 
     public static final double voltage_comp = 12.0;
@@ -234,7 +234,7 @@ public final class Constants {
   public static class LauncherConstants {
     public static final int launcher_id = 12;
 
-    public static final double launcher_kp = 0.1;
+    public static final double launcher_kp = 0.5;
     public static final double launcher_ki = 0.0;
     public static final double launcher_kd = 0.0;
 

@@ -135,15 +135,16 @@ public class RobotContainer {
     driverController.start().whileTrue(new InstantCommand(()-> s_SwerveDrive.zero_imu()));
 
     // Launcher
-    driverController.rightTrigger().onTrue(new InstantCommand(() -> s_Launcher.RunAmp())).onFalse(new InstantCommand(() -> {s_Launcher.Off(); }, s_Launcher));
-    driverController.leftTrigger().onTrue(new InstantCommand(() -> s_Launcher.RunSpeaker())).onFalse(new InstantCommand(() -> {s_Launcher.Off(); }, s_Launcher));
-    
+    driverController.a().onTrue(new InstantCommand(() -> s_Launcher.RunAmp())).onFalse(new InstantCommand(() -> {s_Launcher.Off(); }, s_Launcher));
+    driverController.b().onTrue(new InstantCommand(() -> s_Launcher.RunSpeaker())).onFalse(new InstantCommand(() -> {s_Launcher.Off(); }, s_Launcher));
+    driverController.x().onTrue(new InstantCommand(() -> s_Launcher.RunAmp_SlidesDown())).onFalse(new InstantCommand(() -> {s_Launcher.Off(); }, s_Launcher));
+
     // driverController.rightTrigger().onTrue(amp).onFalse(off);
     // driverController.leftTrigger().onTrue(speaker).onFalse(off);
 
     // Intake 
-    driverController.a().onTrue(new InstantCommand(() -> s_Intake.intake())).onFalse(new InstantCommand(() -> {s_Intake.Off(); }, s_Intake));
-    driverController.b().onTrue(new InstantCommand(() -> s_Intake.Outtake())).onFalse(new InstantCommand(() -> {s_Intake.Off(); }, s_Intake));
+    driverController.rightTrigger().onTrue(new InstantCommand(() -> s_Intake.intake())).onFalse(new InstantCommand(() -> {s_Intake.Off(); }, s_Intake));
+    driverController.leftTrigger().onTrue(new InstantCommand(() -> s_Intake.Outtake())).onFalse(new InstantCommand(() -> {s_Intake.Off(); }, s_Intake));
 
     // Slides 
     driverController.povRight().onTrue(new RunCommand(() -> s_Slides.SlidesUp(), s_Slides)).onFalse(new InstantCommand(() -> {s_Slides.SlidesOff(); }, s_Slides));;
