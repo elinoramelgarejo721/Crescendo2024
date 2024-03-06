@@ -67,34 +67,34 @@ public class Slides extends SubsystemBase {
   }
 
   // Slides
-  // public void SlidesUp() {
-  //     if (toplimitSwitch.get() == false) {
-  //         // Limit switch not tripped
-  //         slides.set(0.1);
-  //     } 
-  //       else if(bottomlimitSwitch.get() == true){
-  //         // Limit Switch Tripped
-  //         slides.set(0);
-  //   }
-  // }
+  public void SlidesUp() {
+      if (toplimitSwitch.get() == false) {
+          // Limit switch not tripped
+          slides.set(0.1);
+      } 
+        else if(bottomlimitSwitch.get() == true){
+          // Limit Switch Tripped
+          slides.set(0);
+    }
+  }
 
 
-  // public void SlidesDown() {
-  //   if (bottomlimitSwitch.get() == true) {
-  //         // Limit switch not tripped
-  //         slides.set(-0.1);
-  //     } 
-  //       else if(bottomlimitSwitch.get() == false){
-  //         // Limit Switch Tripped
-  //         slides.set(0);
-  //   }
-  // }
+  public void SlidesDown() {
+    if (bottomlimitSwitch.get() == true) {
+          // Limit switch not tripped
+          slides.set(-0.1);
+      } 
+        else if(bottomlimitSwitch.get() == false){
+          // Limit Switch Tripped
+          slides.set(0);
+    }
+  }
 
-  // public void SlidesOff() {
-  //   slides.set(0);
-  // }
+  public void SlidesOff() {
+    slides.set(0);
+  }
   
-  // // PID Slides DON'T UTILIZE YET - NOT TUNED, MOST LIKELY NEED ABSOLUTE ENCODER
+  // PID Slides DON'T UTILIZE YET - NOT TUNED, MOST LIKELY NEED ABSOLUTE ENCODER
   // public void setSetpoint(double setpoint) {
   //   slidesPID.setSetpoint(setpoint);
   // }
@@ -103,11 +103,11 @@ public class Slides extends SubsystemBase {
   //   slides.set(slidesPID.calculate(getPositionInches()));
   // }
 
-  // public double getPositionInches() {
-  //   return (Units.rotationsToRadians(slidesEncoder.getPosition())/75)*0.8125;
-  // }
+  public double getPositionInches() {
+    return (Units.rotationsToRadians(slidesEncoder.getPosition())/75)*0.8125;
+  }
 
-  // // DON'T USE YET!!! MIGHT BREAK THINGS- PEOPLE WILL CRY!!! 
+  // DON'T USE YET!!! MIGHT BREAK THINGS- PEOPLE WILL CRY!!! 
   // public void incrementUp() {
   //   if(Math.abs(SlidesConstants.position1 - getPositionInches()) <= SlidesConstants.tolerance) {
   //     slidesPID.setSetpoint(SlidesConstants.position2);
@@ -164,7 +164,7 @@ public class Slides extends SubsystemBase {
   public void periodic() {
     // This method will be called once per scheduler run
     // runPID();
-    // slidesEncoder.setPosition(0);
+    slidesEncoder.setPosition(0);
   }
 
   @Override

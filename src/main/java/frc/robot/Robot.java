@@ -29,6 +29,9 @@ import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import edu.wpi.first.cscore.UsbCamera;
+import edu.wpi.first.cscore.CvSink;
+import edu.wpi.first.cscore.CvSource;
 
 // Custom Imports
 import frc.robot.Vision.Limelight;
@@ -49,6 +52,7 @@ public class Robot extends TimedRobot {
   private Command m_autonomousCommand;
 
   private RobotContainer m_robotContainer;
+  Thread m_visionThread;
   // private SwerveDrive s_Swerve;
 
   private final Limelight limelight = new Limelight();
@@ -76,6 +80,16 @@ public class Robot extends TimedRobot {
     // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
     // autonomous chooser on the dashboard.
     m_robotContainer = new RobotContainer();
+    CameraServer.startAutomaticCapture();
+    m_visionThread = 
+      new Thread(
+        () -> {
+          UsbCamera camera = CameraServer.startAutomaticCapture();
+          camera.setResolution(640, 480);
+
+          CvSink cvSink = CameraServer.getVideo();
+        }
+      );
   }
 
   /**
