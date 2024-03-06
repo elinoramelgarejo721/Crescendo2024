@@ -3,7 +3,10 @@ package frc.robot.subsystems;
 
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.RelativeEncoder;
+import com.revrobotics.SparkMaxAlternateEncoder;
 import com.revrobotics.CANSparkLowLevel.MotorType;
+import com.revrobotics.SparkPIDController;
+import com.revrobotics.CANSparkBase.ControlType;
 
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.proto.Controller;
@@ -24,22 +27,29 @@ public class Slides extends SubsystemBase {
   // Left Climber
   private CANSparkMax slides;
   private RelativeEncoder slidesEncoder;
-  private PIDController slidesPID;
+  private SparkPIDController slidesPID;
 
   private DigitalInput toplimitSwitch;
   private DigitalInput bottomlimitSwitch;
+
+  private int slides_state;
 
   /** Creates a new ExampleSubsystem. */
   public Slides() {
 
     // Slides Config
     this.slides = new CANSparkMax(SlidesConstants.slides_id, MotorType.kBrushless);
-    slides.setInverted(false);
-    this.slidesEncoder = slides.getEncoder();
-    this.slidesPID = new PIDController(SlidesConstants.slides_kp, SlidesConstants.slides_ki, SlidesConstants.slides_kd);
+    this.slidesEncoder = this.slides.getAlternateEncoder(8192);
+    this.slidesPID = this.slides.getPIDController();
+    this.slidesPID.setFF(0);
+    this.slidesPID.setP(SlidesConstants.slides_kp);
+    this.slidesPID.setI(SlidesConstants.slides_ki);
+    this.slidesPID.setD(SlidesConstants.slides_kd);
 
     this.bottomlimitSwitch = new DigitalInput(0);
     this.toplimitSwitch    = new DigitalInput(1);
+
+    this.slides_state = 0;
 
     Shuffleboard.getTab("Game").addDouble(
         "Slides" + "Pos", () -> slidesEncoder.getPosition()
@@ -57,32 +67,32 @@ public class Slides extends SubsystemBase {
   }
 
   // Slides
-  public void SlidesUp() {
-      if (toplimitSwitch.get() == false) {
-          // Limit switch not tripped
-          slides.set(0.1);
-      } 
-        else if(bottomlimitSwitch.get() == true){
-          // Limit Switch Tripped
-          slides.set(0);
-    }
-  }
+  // public void SlidesUp() {
+  //     if (toplimitSwitch.get() == false) {
+  //         // Limit switch not tripped
+  //         slides.set(0.1);
+  //     } 
+  //       else if(bottomlimitSwitch.get() == true){
+  //         // Limit Switch Tripped
+  //         slides.set(0);
+  //   }
+  // }
 
 
-  public void SlidesDown() {
-    if (bottomlimitSwitch.get() == true) {
-          // Limit switch not tripped
-          slides.set(-0.1);
-      } 
-        else if(bottomlimitSwitch.get() == false){
-          // Limit Switch Tripped
-          slides.set(0);
-    }
-  }
+  // public void SlidesDown() {
+  //   if (bottomlimitSwitch.get() == true) {
+  //         // Limit switch not tripped
+  //         slides.set(-0.1);
+  //     } 
+  //       else if(bottomlimitSwitch.get() == false){
+  //         // Limit Switch Tripped
+  //         slides.set(0);
+  //   }
+  // }
 
-  public void SlidesOff() {
-    slides.set(0);
-  }
+  // public void SlidesOff() {
+  //   slides.set(0);
+  // }
   
   // // PID Slides DON'T UTILIZE YET - NOT TUNED, MOST LIKELY NEED ABSOLUTE ENCODER
   // public void setSetpoint(double setpoint) {
@@ -121,6 +131,34 @@ public class Slides extends SubsystemBase {
   //     slidesPID.setSetpoint(SlidesConstants.position2);
   //   }
   // }
+
+  public void runToState(double target) {
+    this.slidesPID.setReference(target, ControlType.kPosition);
+  }
+
+  public int getState() {
+    return this.slides_state;
+  }
+
+  public void counterUp() {
+    if (this.slides_state == 2)
+      return;
+    this.slides_state++;
+  }
+
+  public void counterDown() {
+    if (this.slides_state == 0)
+      return;
+    this.slides_state--;
+  }
+
+  public boolean getBottomLimitSwitch() {
+    return this.bottomlimitSwitch.get();
+  }
+
+  public boolean getTopLimitSwitch() {
+    return this.toplimitSwitch.get();
+  }
 
   @Override
   public void periodic() {

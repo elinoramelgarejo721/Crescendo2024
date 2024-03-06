@@ -42,7 +42,7 @@ import frc.robot.subsystems.Slides;
 import frc.robot.Constants.DriveConstants.MotorPosition;
 import frc.robot.Constants.ControllerConstants;
 // import frc.robot.commands.ExampleAuto;
-
+import frc.robot.commands.DefaultSlides;
 // Commands
 import frc.robot.commands.TeleOpSwerve;
 
@@ -81,6 +81,9 @@ public class RobotContainer {
   // InstantCommand speaker = new InstantCommand(() -> {this.s_Launcher.Run(-this.driverController.getRightTriggerAxis());}, this.s_Launcher);
   // InstantCommand off     = new InstantCommand(() -> {this.s_Launcher.Run(0);}, this.s_Launcher);
 
+  // Slides
+  InstantCommand increment_state = new InstantCommand( () -> {this.s_Slides.counterUp();} );
+  InstantCommand decrement_state = new InstantCommand( () -> {this.s_Slides.counterDown();} );
 
   // Xbox Controller
   private final CommandXboxController driverController =
@@ -103,6 +106,10 @@ public class RobotContainer {
       () -> -driverController.getRightX(),
       () -> driverController.back().getAsBoolean())
     );
+
+    // s_Slides.setDefaultCommand(
+    //   new DefaultSlides(s_Slides)
+    // );
 
     // s_Launcher.setDefaultCommand(amp);
     // s_Launcher.setDefaultCommand(speaker);
@@ -147,14 +154,18 @@ public class RobotContainer {
     driverController.leftTrigger().onTrue(new InstantCommand(() -> s_Intake.Outtake())).onFalse(new InstantCommand(() -> {s_Intake.Off(); }, s_Intake));
 
     // Slides 
-    driverController.povRight().onTrue(new RunCommand(() -> s_Slides.SlidesUp(), s_Slides)).onFalse(new InstantCommand(() -> {s_Slides.SlidesOff(); }, s_Slides));;
-    driverController.povLeft().onTrue(new RunCommand(() -> s_Slides.SlidesDown(), s_Slides)).onFalse(new InstantCommand(() -> {s_Slides.SlidesOff(); }, s_Slides));
+    // driverController.povRight().onTrue(new RunCommand(() -> s_Slides.SlidesUp(), s_Slides)).onFalse(new InstantCommand(() -> {s_Slides.SlidesOff(); }, s_Slides));;
+    // driverController.povLeft().onTrue(new RunCommand(() -> s_Slides.SlidesDown(), s_Slides)).onFalse(new InstantCommand(() -> {s_Slides.SlidesOff(); }, s_Slides));
+    // driverController.povRight().onTrue(increment_state);
+    // driverController.povLeft().onTrue(decrement_state);
+
+    // new InstantCommand(() -> {s_Slides.SlidesOff(); }, s_Slides)
+    // new InstantCommand(() -> {s_Slides.SlidesOff(); }, s_Slides)
 
     // .onFalse(new InstantCommand(() -> {s_Slides.SlidesOff(); }, s_Slides));
 
     // driverController.x().onTrue(new InstantCommand(() -> s_Slides.incrementUp()));
     // driverController.y().onTrue(new InstantCommand(() -> s_Slides.incrementDown()));
-
 
     // Left Climber
     driverController.leftBumper().onTrue(run_left_climber_up).onFalse(new InstantCommand(() -> {s_Climber.LeftRun(0); }, s_Climber));

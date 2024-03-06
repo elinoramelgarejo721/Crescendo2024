@@ -109,13 +109,13 @@ public final class Constants {
 
 
     public static final double angle_kP  = 0.1;
-    public static final double angle_kI  = 0.0;
+    public static final double angle_kI  = 0.001;
     public static final double angle_kD  = 0.0;
     public static final double angle_kFF = 0.0;
 
     public static final double drive_kP  = 0.1;
     public static final double drive_kI  = 0.0;
-    public static final double drive_kD  = 0.121;
+    public static final double drive_kD  = 0.0;
     public static final double drive_kFF = 0.0;
 
     public static final double voltage_comp = 12.0;
