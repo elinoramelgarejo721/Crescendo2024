@@ -20,6 +20,7 @@ import edu.wpi.first.wpilibj2.command.button.POVButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.Constants.ClimberConstants;
 import frc.robot.Constants.ControllerConstants;
+import frc.robot.Constants.DriveConstants;
 import frc.robot.Constants.SlidesConstants;
 
 public class Slides extends SubsystemBase {
@@ -40,6 +41,7 @@ public class Slides extends SubsystemBase {
     // Slides Config
     this.slides = new CANSparkMax(SlidesConstants.slides_id, MotorType.kBrushless);
     this.slidesEncoder = this.slides.getAlternateEncoder(8192);
+    this.slidesEncoder.setPosition(0);
     this.slidesPID = this.slides.getPIDController();
     this.slidesPID.setFF(0);
     this.slidesPID.setP(SlidesConstants.slides_kp);
@@ -52,7 +54,7 @@ public class Slides extends SubsystemBase {
     this.slides_state = 0;
 
     Shuffleboard.getTab("Game").addDouble(
-        "Slides" + "Pos", () -> slidesEncoder.getPosition()
+        "Slides" + "Pos", () -> getPositionInches()
     );
 
     Shuffleboard.getTab("Game").addBoolean(
@@ -70,7 +72,7 @@ public class Slides extends SubsystemBase {
   public void SlidesUp() {
       if (toplimitSwitch.get() == false) {
           // Limit switch not tripped
-          slides.set(0.1);
+          slides.set(0.4);
       } 
         else if(bottomlimitSwitch.get() == true){
           // Limit Switch Tripped
@@ -78,13 +80,26 @@ public class Slides extends SubsystemBase {
     }
   }
 
+  public void SlidesNoUp() {
+    if (toplimitSwitch.get() == true) {
+          // Limit switch not tripped
+          slides.set(0.0);
+      } 
+  }
 
   public void SlidesDown() {
     if (bottomlimitSwitch.get() == true) {
           // Limit switch not tripped
-          slides.set(-0.1);
+          slides.set(-0.4);
       } 
         else if(bottomlimitSwitch.get() == false){
+          // Limit Switch Tripped
+          slides.set(0);
+    }
+  }
+
+  public void SlidesNoDown() {
+    if(bottomlimitSwitch.get() == false){
           // Limit Switch Tripped
           slides.set(0);
     }
@@ -104,7 +119,7 @@ public class Slides extends SubsystemBase {
   // }
 
   public double getPositionInches() {
-    return (Units.rotationsToRadians(slidesEncoder.getPosition())/75)*0.8125;
+    return (Units.rotationsToRadians(slidesEncoder.getPosition())/80)*0.8125;
   }
 
   // DON'T USE YET!!! MIGHT BREAK THINGS- PEOPLE WILL CRY!!! 
@@ -163,8 +178,8 @@ public class Slides extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-    // runPID();
-    slidesEncoder.setPosition(0);
+    // runToState(target);
+
   }
 
   @Override

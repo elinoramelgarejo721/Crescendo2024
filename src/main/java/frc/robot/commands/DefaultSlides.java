@@ -4,24 +4,32 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Constants.SlidesConstants;
 import frc.robot.subsystems.Slides;
-
 public class DefaultSlides extends Command {
 
   Slides slides;
+  // private DigitalInput toplimitSwitch;
+  // private DigitalInput bottomlimitSwitch;
 
   /** Creates a new DefaultSlides. */
   public DefaultSlides(Slides slides) {
     // Use addRequirements() here to declare subsystem dependencies.
     this.slides = slides;
     addRequirements(slides);
+
+    // this.bottomlimitSwitch = new DigitalInput(0);
+    // this.toplimitSwitch    = new DigitalInput(1);
+
   }
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {}
+  public void initialize() {
+
+  }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
@@ -31,14 +39,20 @@ public class DefaultSlides extends Command {
 
       case 0:
         this.slides.runToState(SlidesConstants.position1);
+        this.slides.SlidesNoUp();
+        this.slides.SlidesNoDown();
         break;
 
       case 1:
         this.slides.runToState(SlidesConstants.position2);
+        this.slides.SlidesNoUp();
+        this.slides.SlidesNoDown();
         break;
 
       case 2:
         this.slides.runToState(SlidesConstants.position3);
+        this.slides.SlidesNoUp();
+        this.slides.SlidesNoDown();
         break;
 
       default:

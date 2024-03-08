@@ -249,9 +249,9 @@ public final class Constants {
     public static final double slides_kd = 0.0;
 
     // Positions
-    public static final double position1 = -1;
-    public static final double position2 = 0;
-    public static final double position3 = 1;
+    public static final double position1 = 0;
+    public static final double position2 = -140;
+    public static final double position3 = 10;
     public static final double tolerance = 0.5;
 
   }
