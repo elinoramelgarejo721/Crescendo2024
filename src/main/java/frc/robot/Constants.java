@@ -113,7 +113,7 @@ public final class Constants {
     public static final double angle_kD  = 0.0;
     public static final double angle_kFF = 0.0;
 
-    public static final double drive_kP  = 0.1;
+    public static final double drive_kP  = 1.0;
     public static final double drive_kI  = 0.0;
     public static final double drive_kD  = 0.0;
     public static final double drive_kFF = 0.0;
@@ -150,7 +150,7 @@ public final class Constants {
     
     
     public static final HolonomicPathFollowerConfig pathFollowerConfig = new HolonomicPathFollowerConfig(
-      new PIDConstants(0.1, 0, 0), // Translation constants 
+      new PIDConstants(50.0, 0, 0), // Translation constants 
       new PIDConstants(0.1, 0, 0), // Rotation constants 
       maxSpeed, 
       flModuleOffset.getNorm(), // Drive base radius (distance from center to furthest module) 
@@ -209,7 +209,7 @@ public final class Constants {
   public static class ControllerConstants {
 
     public static final int driver_controller_id = 0;
-    public static final double stickDeadband = 0.05;
+    public static final double stickDeadband = 0.1;
 
     public static final Joystick driver1 = new Joystick(0);
 
@@ -250,8 +250,8 @@ public final class Constants {
 
     // Positions
     public static final double position1 = 0;
-    public static final double position2 = -140;
-    public static final double position3 = 10;
+    public static final double position2 = -170; // -140
+    public static final double position3 = 45;
     public static final double tolerance = 0.5;
 
   }

@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.RunCommand;
+import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
@@ -43,6 +44,8 @@ import frc.robot.Constants.DriveConstants.MotorPosition;
 import frc.robot.Constants.ControllerConstants;
 // import frc.robot.commands.ExampleAuto;
 import frc.robot.commands.DefaultSlides;
+import frc.robot.commands.LaunchAmp;
+import frc.robot.commands.LaunchSpeaker;
 // Commands
 import frc.robot.commands.TeleOpSwerve;
 
@@ -111,8 +114,16 @@ public class RobotContainer {
     //   new DefaultSlides(s_Slides)
     // );
 
-    // s_Launcher.setDefaultCommand(amp);
-    // s_Launcher.setDefaultCommand(speaker);
+    // s_Launcher.setDefaultCommand(
+    //   new LaunchAmp(s_Intake, s_Launcher)
+    // );
+
+    // s_Launcher.setDefaultCommand(
+    //   new LaunchSpeaker(s_Intake, s_Launcher)
+    // );
+
+    // Register Named Commands
+    NamedCommands.registerCommand("RunSpeaker", new SequentialCommandGroup(new InstantCommand(() -> s_Launcher.RunSpeaker()), new InstantCommand(() -> s_Intake.intake())));
 
     configureBindings();
 
@@ -142,8 +153,18 @@ public class RobotContainer {
     driverController.start().whileTrue(new InstantCommand(()-> s_SwerveDrive.zero_imu()));
 
     // Launcher
-    driverController.a().onTrue(new InstantCommand(() -> s_Launcher.RunAmp())).onFalse(new InstantCommand(() -> {s_Launcher.Off(); }, s_Launcher));
-    driverController.b().onTrue(new InstantCommand(() -> s_Launcher.RunSpeaker())).onFalse(new InstantCommand(() -> {s_Launcher.Off(); }, s_Launcher));
+    // driverController.a().onTrue(new InstantCommand(() -> s_Launcher.RunAmp())).onFalse(new InstantCommand(() -> {s_Launcher.Off(); }, s_Launcher));
+    // driverController.b().onTrue(new InstantCommand(() -> s_Launcher.RunSpeaker())).onFalse(new InstantCommand(() -> {s_Launcher.Off(); }, s_Launcher));
+    driverController.a().onTrue(new SequentialCommandGroup(
+      new InstantCommand(() -> s_Launcher.RunAmp()), new InstantCommand(() -> s_Intake.intake()))
+      ).onFalse(
+      new SequentialCommandGroup(new InstantCommand(() -> {s_Launcher.Off(); }, s_Launcher), new InstantCommand(() -> {s_Intake.Off(); }, s_Intake))
+      );
+    driverController.b().onTrue(new SequentialCommandGroup(
+      new InstantCommand(() -> s_Launcher.RunSpeaker()), new InstantCommand(() -> s_Intake.intake()))
+      ).onFalse(
+        new SequentialCommandGroup(new InstantCommand(() -> {s_Launcher.Off(); }, s_Launcher), new InstantCommand(() -> {s_Intake.Off(); }, s_Intake))
+      );
     // driverController.x().onTrue(new InstantCommand(() -> s_Launcher.RunAmp_SlidesDown())).onFalse(new InstantCommand(() -> {s_Launcher.Off(); }, s_Launcher));
 
     // driverController.rightTrigger().onTrue(amp).onFalse(off);
