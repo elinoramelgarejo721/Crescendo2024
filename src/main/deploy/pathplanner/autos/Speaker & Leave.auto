@@ -1,16 +1,22 @@
 {
   "version": 1.0,
-  "startingPose": {
-    "position": {
-      "x": 1.28,
-      "y": 5.59
-    },
-    "rotation": 180.0
-  },
+  "startingPose": null,
   "command": {
     "type": "sequential",
     "data": {
       "commands": [
+        {
+          "type": "named",
+          "data": {
+            "name": "ResetModules"
+          }
+        },
+        {
+          "type": "wait",
+          "data": {
+            "waitTime": 0.25
+          }
+        },
         {
           "type": "named",
           "data": {
@@ -26,7 +32,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": "Back Up (Facing Forward)"
+            "pathName": "Leave Forward"
           }
         }
       ]
