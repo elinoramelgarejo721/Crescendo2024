@@ -1,22 +1,16 @@
 {
   "version": 1.0,
-  "startingPose": null,
+  "startingPose": {
+    "position": {
+      "x": 2,
+      "y": 2
+    },
+    "rotation": 0
+  },
   "command": {
     "type": "sequential",
     "data": {
       "commands": [
-        {
-          "type": "named",
-          "data": {
-            "name": "ResetModules"
-          }
-        },
-        {
-          "type": "wait",
-          "data": {
-            "waitTime": 0.25
-          }
-        },
         {
           "type": "named",
           "data": {
@@ -39,12 +33,6 @@
           "type": "named",
           "data": {
             "name": "IntakeOff"
-          }
-        },
-        {
-          "type": "path",
-          "data": {
-            "pathName": "Leave Forward"
           }
         }
       ]

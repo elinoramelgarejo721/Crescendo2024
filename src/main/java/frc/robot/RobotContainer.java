@@ -110,9 +110,9 @@ public class RobotContainer {
       () -> driverController.back().getAsBoolean())
     );
 
-    // s_Slides.setDefaultCommand(
-    //   new DefaultSlides(s_Slides)
-    // );
+    s_Slides.setDefaultCommand(
+      new DefaultSlides(s_Slides)
+    );
 
     // s_Launcher.setDefaultCommand(
     //   new LaunchAmp(s_Intake, s_Launcher)
@@ -124,6 +124,8 @@ public class RobotContainer {
 
     // Register Named Commands
     NamedCommands.registerCommand("RunSpeaker", new SequentialCommandGroup(new InstantCommand(() -> s_Launcher.RunSpeaker()), new InstantCommand(() -> s_Intake.intake())));
+    NamedCommands.registerCommand("IntakeOff", new InstantCommand(() -> s_Intake.Off()));
+    NamedCommands.registerCommand("LauncherOff", new InstantCommand(() -> s_Launcher.Off()));
     NamedCommands.registerCommand("ResetModules", new InstantCommand(() -> s_SwerveDrive.resetToAbsolute()));
     NamedCommands.registerCommand("ResetPigeon", new InstantCommand(() -> s_SwerveDrive.zero_imu()));
 
@@ -178,10 +180,10 @@ public class RobotContainer {
     driverController.leftTrigger().onTrue(new InstantCommand(() -> s_Intake.Outtake())).onFalse(new InstantCommand(() -> {s_Intake.Off(); }, s_Intake));
 
     // // Slides 
-    driverController.y().onTrue(new RunCommand(() -> s_Slides.SlidesUp(), s_Slides)).onFalse(new InstantCommand(() -> {s_Slides.SlidesOff(); }, s_Slides));;
-    driverController.x().onTrue(new RunCommand(() -> s_Slides.SlidesDown(), s_Slides)).onFalse(new InstantCommand(() -> {s_Slides.SlidesOff(); }, s_Slides));
-    // driverController.povRight().onTrue(increment_state);
-    // driverController.povLeft().onTrue(decrement_state);
+    // driverController.y().onTrue(new RunCommand(() -> s_Slides.SlidesUp(), s_Slides)).onFalse(new InstantCommand(() -> {s_Slides.SlidesOff(); }, s_Slides));;
+    // driverController.x().onTrue(new RunCommand(() -> s_Slides.SlidesDown(), s_Slides)).onFalse(new InstantCommand(() -> {s_Slides.SlidesOff(); }, s_Slides));
+    driverController.povRight().onTrue(increment_state);
+    driverController.povLeft().onTrue(decrement_state);
 
     // new InstantCommand(() -> {s_Slides.SlidesOff(); }, s_Slides)
     // new InstantCommand(() -> {s_Slides.SlidesOff(); }, s_Slides)

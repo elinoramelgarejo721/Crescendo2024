@@ -83,7 +83,7 @@ public class Slides extends SubsystemBase {
   public void SlidesNoUp() {
     if (toplimitSwitch.get() == true) {
           // Limit switch not tripped
-          slides.set(0.0);
+          slides.set(0);
       } 
   }
 
