@@ -128,16 +128,16 @@ public final class Constants {
     public static final double maxAngularVelocity = 11.5; // 11.5
 
     // Auto
-    public static final Translation2d flModuleOffset = new Translation2d(0.7366, -0.7366);
-    public static final Translation2d frModuleOffset = new Translation2d(0.7366, 0.7366);
-    public static final Translation2d blModuleOffset = new Translation2d(-0.7366, -0.7366);
-    public static final Translation2d brModuleOffset = new Translation2d(-0.7366, +0.7366);
+    public static final Translation2d flModuleOffset = new Translation2d(-0.7366, 0.7366);
+    public static final Translation2d frModuleOffset = new Translation2d(-0.7366, -0.7366);
+    public static final Translation2d blModuleOffset = new Translation2d(0.7366, 0.7366);
+    public static final Translation2d brModuleOffset = new Translation2d(0.7366, -0.7366);
 
     public static final SwerveDriveKinematics swerve_kinematics = new SwerveDriveKinematics(
-      new Translation2d(wheel_base / 2.0, -track_width / 2.0),  // +-
-      new Translation2d(wheel_base / 2.0, track_width / 2.0),   // ++
-      new Translation2d(-wheel_base / 2.0, -track_width / 2.0), // -- 
-      new Translation2d(-wheel_base / 2.0, +track_width / 2.0)  // -+
+      new Translation2d(-wheel_base / 2.0, track_width / 2.0),    // -+
+      new Translation2d(wheel_base / 2.0, track_width / 2.0),   // --
+      new Translation2d(-wheel_base / 2.0, -track_width / 2.0),     // ++ 
+      new Translation2d(wheel_base / 2.0, -track_width / 2.0)     // +-
     );
 
     // Took out angle offsets
@@ -250,8 +250,8 @@ public final class Constants {
 
     // Positions
     public static final double position1 = 0;
-    public static final double position2 = -160; // -140
-    public static final double position3 = 57;
+    public static final double position2 = -163; // -140
+    public static final double position3 = 53;
     public static final double tolerance = 0.5;
 
   }

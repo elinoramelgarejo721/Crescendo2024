@@ -44,8 +44,6 @@ import frc.robot.Constants.DriveConstants.MotorPosition;
 import frc.robot.Constants.ControllerConstants;
 // import frc.robot.commands.ExampleAuto;
 import frc.robot.commands.DefaultSlides;
-import frc.robot.commands.LaunchAmp;
-import frc.robot.commands.LaunchSpeaker;
 // Commands
 import frc.robot.commands.TeleOpSwerve;
 
@@ -106,13 +104,13 @@ public class RobotContainer {
       s_SwerveDrive, 
       () -> driverController.getLeftY(), 
       () -> -driverController.getLeftX(), 
-      () -> -driverController.getRightX(),
+      () -> driverController.getRightX(),
       () -> driverController.back().getAsBoolean())
     );
 
-    s_Slides.setDefaultCommand(
-      new DefaultSlides(s_Slides)
-    );
+    // s_Slides.setDefaultCommand(
+    //   new DefaultSlides(s_Slides)
+    // );
 
     // s_Launcher.setDefaultCommand(
     //   new LaunchAmp(s_Intake, s_Launcher)
@@ -179,11 +177,11 @@ public class RobotContainer {
     driverController.rightTrigger().onTrue(new InstantCommand(() -> s_Intake.intake())).onFalse(new InstantCommand(() -> {s_Intake.Off(); }, s_Intake));
     driverController.leftTrigger().onTrue(new InstantCommand(() -> s_Intake.Outtake())).onFalse(new InstantCommand(() -> {s_Intake.Off(); }, s_Intake));
 
-    // // Slides 
-    // driverController.y().onTrue(new RunCommand(() -> s_Slides.SlidesUp(), s_Slides)).onFalse(new InstantCommand(() -> {s_Slides.SlidesOff(); }, s_Slides));;
-    // driverController.x().onTrue(new RunCommand(() -> s_Slides.SlidesDown(), s_Slides)).onFalse(new InstantCommand(() -> {s_Slides.SlidesOff(); }, s_Slides));
-    driverController.povRight().onTrue(increment_state);
-    driverController.povLeft().onTrue(decrement_state);
+    // Slides 
+    driverController.y().onTrue(new RunCommand(() -> s_Slides.SlidesUp(), s_Slides)).onFalse(new InstantCommand(() -> {s_Slides.SlidesOff(); }, s_Slides));;
+    driverController.x().onTrue(new RunCommand(() -> s_Slides.SlidesDown(), s_Slides)).onFalse(new InstantCommand(() -> {s_Slides.SlidesOff(); }, s_Slides));
+    // driverController.povRight().onTrue(increment_state).onFalse(new InstantCommand(() -> {s_Slides.SlidesOff(); }, s_Slides));
+    // driverController.povLeft().onTrue(decrement_state).onFalse(new InstantCommand(() -> {s_Slides.SlidesOff(); }, s_Slides));
 
     // new InstantCommand(() -> {s_Slides.SlidesOff(); }, s_Slides)
     // new InstantCommand(() -> {s_Slides.SlidesOff(); }, s_Slides)

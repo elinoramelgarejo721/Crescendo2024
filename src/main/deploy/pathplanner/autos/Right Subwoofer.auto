@@ -5,7 +5,7 @@
       "x": 0.75,
       "y": 6.65
     },
-    "rotation": 60.0
+    "rotation": -120.0
   },
   "command": {
     "type": "sequential",
@@ -18,9 +18,27 @@
           }
         },
         {
+          "type": "named",
+          "data": {
+            "name": "RunSpeaker"
+          }
+        },
+        {
           "type": "wait",
           "data": {
             "waitTime": 0.25
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "LauncherOff"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "IntakeOff"
           }
         },
         {

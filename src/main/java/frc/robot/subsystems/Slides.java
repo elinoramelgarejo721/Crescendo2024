@@ -80,11 +80,12 @@ public class Slides extends SubsystemBase {
     }
   }
 
-  public void SlidesNoUp() {
-    if (toplimitSwitch.get() == true) {
-          // Limit switch not tripped
-          slides.set(0);
-      } 
+  public boolean topSwitchHit() {
+    return toplimitSwitch.get() == true;
+  }
+
+  public boolean topSwitchNotHit() {
+    return toplimitSwitch.get() == false;
   }
 
   public void SlidesDown() {
@@ -98,11 +99,12 @@ public class Slides extends SubsystemBase {
     }
   }
 
-  public void SlidesNoDown() {
-    if(bottomlimitSwitch.get() == false){
-          // Limit Switch Tripped
-          slides.set(0);
-    }
+  public boolean bottomSwitchHit() {
+    return bottomlimitSwitch.get() == false;
+  }
+
+  public boolean bottomSwitchNotHit() {
+    return bottomlimitSwitch.get() == true;
   }
 
   public void SlidesOff() {

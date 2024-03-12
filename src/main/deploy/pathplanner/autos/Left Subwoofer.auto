@@ -1,6 +1,12 @@
 {
   "version": 1.0,
-  "startingPose": null,
+  "startingPose": {
+    "position": {
+      "x": 0.8,
+      "y": 4.5
+    },
+    "rotation": 120.0
+  },
   "command": {
     "type": "sequential",
     "data": {
@@ -26,7 +32,19 @@
         {
           "type": "path",
           "data": {
-            "pathName": "Leave Forward"
+            "pathName": "Left Subwoofer"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "IntakeOff"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "LauncherOff"
           }
         }
       ]
