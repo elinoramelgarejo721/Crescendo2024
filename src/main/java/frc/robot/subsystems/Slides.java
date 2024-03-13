@@ -51,7 +51,7 @@ public class Slides extends SubsystemBase {
     this.bottomlimitSwitch = new DigitalInput(0);
     this.toplimitSwitch    = new DigitalInput(1);
 
-    this.slides_state = 0;
+    this.slides_state = 1;
 
     Shuffleboard.getTab("Game").addDouble(
         "Slides" + "Pos", () -> getPositionInches()
@@ -109,6 +109,10 @@ public class Slides extends SubsystemBase {
 
   public void SlidesOff() {
     slides.set(0);
+  }
+
+  public void SetEncoderPosition(double setpoint) {
+    this.slidesEncoder.setPosition(setpoint);
   }
   
   // PID Slides DON'T UTILIZE YET - NOT TUNED, MOST LIKELY NEED ABSOLUTE ENCODER

@@ -244,13 +244,13 @@ public final class Constants {
     public static final int slides_id = 13;
 
     // Slides
-    public static final double slides_kp = 0.1;
+    public static final double slides_kp = 0.05;
     public static final double slides_ki = 0.0;
     public static final double slides_kd = 0.0;
 
     // Positions
-    public static final double position1 = 0;
-    public static final double position2 = -163; // -140
+    public static final double position1 = -163;
+    public static final double position2 = 0; // -140
     public static final double position3 = 53;
     public static final double tolerance = 0.5;
 

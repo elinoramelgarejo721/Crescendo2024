@@ -105,12 +105,13 @@ public class RobotContainer {
       () -> driverController.getLeftY(), 
       () -> -driverController.getLeftX(), 
       () -> driverController.getRightX(),
-      () -> driverController.back().getAsBoolean())
+      () -> driverController.back().getAsBoolean()
+      )
     );
 
-    // s_Slides.setDefaultCommand(
-    //   new DefaultSlides(s_Slides)
-    // );
+    s_Slides.setDefaultCommand(
+      new DefaultSlides(s_Slides)
+    );
 
     // s_Launcher.setDefaultCommand(
     //   new LaunchAmp(s_Intake, s_Launcher)
@@ -178,10 +179,10 @@ public class RobotContainer {
     driverController.leftTrigger().onTrue(new InstantCommand(() -> s_Intake.Outtake())).onFalse(new InstantCommand(() -> {s_Intake.Off(); }, s_Intake));
 
     // Slides 
-    driverController.y().onTrue(new RunCommand(() -> s_Slides.SlidesUp(), s_Slides)).onFalse(new InstantCommand(() -> {s_Slides.SlidesOff(); }, s_Slides));;
-    driverController.x().onTrue(new RunCommand(() -> s_Slides.SlidesDown(), s_Slides)).onFalse(new InstantCommand(() -> {s_Slides.SlidesOff(); }, s_Slides));
-    // driverController.povRight().onTrue(increment_state).onFalse(new InstantCommand(() -> {s_Slides.SlidesOff(); }, s_Slides));
-    // driverController.povLeft().onTrue(decrement_state).onFalse(new InstantCommand(() -> {s_Slides.SlidesOff(); }, s_Slides));
+    // driverController.y().onTrue(new RunCommand(() -> s_Slides.SlidesUp(), s_Slides)).onFalse(new InstantCommand(() -> {s_Slides.SlidesOff(); }, s_Slides));;
+    // driverController.x().onTrue(new RunCommand(() -> s_Slides.SlidesDown(), s_Slides)).onFalse(new InstantCommand(() -> {s_Slides.SlidesOff(); }, s_Slides));
+    driverController.povRight().onTrue(increment_state).onFalse(new InstantCommand(() -> {s_Slides.SlidesOff(); }, s_Slides));
+    driverController.povLeft().onTrue(decrement_state).onFalse(new InstantCommand(() -> {s_Slides.SlidesOff(); }, s_Slides));
 
     // new InstantCommand(() -> {s_Slides.SlidesOff(); }, s_Slides)
     // new InstantCommand(() -> {s_Slides.SlidesOff(); }, s_Slides)

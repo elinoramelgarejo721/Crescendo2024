@@ -13,9 +13,6 @@ public class DefaultSlides extends Command {
   Slides slides;
   // private DigitalInput toplimitSwitch;
   // private DigitalInput bottomlimitSwitch;
-  private double position1 = SlidesConstants.position1;
-  private double position2 = SlidesConstants.position2;
-  private double position3 = SlidesConstants.position3;
 
   /** Creates a new DefaultSlides. */
   public DefaultSlides(Slides slides) {
@@ -41,24 +38,24 @@ public class DefaultSlides extends Command {
     switch(this.slides.getState()) {
 
       case 0:
-        this.slides.runToState(position1);
+        if (this.slides.bottomSwitchNotHit()){
+          this.slides.runToState(SlidesConstants.position1);
+        }  
+        else if (this.slides.bottomSwitchHit()) {
+          this.slides.SetEncoderPosition(SlidesConstants.position1);
+        } 
         break;
 
       case 1:
-        if (this.slides.bottomSwitchNotHit()){
-          this.slides.runToState(position2);
-        }  
-        else if (this.slides.bottomSwitchHit()) {
-          position2 += 1;
-        } 
+        this.slides.runToState(SlidesConstants.position2);
         break;
 
       case 2:
         if (this.slides.topSwitchNotHit()) {
-          this.slides.runToState(position3);
+          this.slides.runToState(SlidesConstants.position3);
         } 
         else if (this.slides.topSwitchHit()) {
-          position3 -= 1;
+          this.slides.SetEncoderPosition(SlidesConstants.position3);
         } 
         break;
 
