@@ -135,8 +135,8 @@ public final class Constants {
 
     public static final SwerveDriveKinematics swerve_kinematics = new SwerveDriveKinematics(
       new Translation2d(-wheel_base / 2.0, track_width / 2.0),    // -+
-      new Translation2d(wheel_base / 2.0, track_width / 2.0),   // --
-      new Translation2d(-wheel_base / 2.0, -track_width / 2.0),     // ++ 
+      new Translation2d(-wheel_base / 2.0, -track_width / 2.0),   // --
+      new Translation2d(wheel_base / 2.0, track_width / 2.0),     // ++ 
       new Translation2d(wheel_base / 2.0, -track_width / 2.0)     // +-
     );
 
@@ -251,7 +251,7 @@ public final class Constants {
     // Positions
     public static final double position1 = -163;
     public static final double position2 = 0; // -140
-    public static final double position3 = 53;
+    public static final double position3 = 70;
     public static final double tolerance = 0.5;
 
   }

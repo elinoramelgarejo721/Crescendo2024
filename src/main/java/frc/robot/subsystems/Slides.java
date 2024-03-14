@@ -54,7 +54,7 @@ public class Slides extends SubsystemBase {
     this.slides_state = 1;
 
     Shuffleboard.getTab("Game").addDouble(
-        "Slides" + "Pos", () -> getPositionInches()
+        "Slides" + "Pos", () -> getPosition()
     );
 
     Shuffleboard.getTab("Game").addBoolean(
@@ -124,8 +124,8 @@ public class Slides extends SubsystemBase {
   //   slides.set(slidesPID.calculate(getPositionInches()));
   // }
 
-  public double getPositionInches() {
-    return (Units.rotationsToRadians(slidesEncoder.getPosition())/80)*0.8125;
+  public double getPosition() {
+    return this.slides.getEncoder().getPosition();
   }
 
   // DON'T USE YET!!! MIGHT BREAK THINGS- PEOPLE WILL CRY!!! 
