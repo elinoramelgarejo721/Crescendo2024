@@ -41,7 +41,7 @@ public class Launcher extends SubsystemBase {
   }
 
   public void RunAmp() {
-    launcher.set(0.3);
+    launcher.set(0.4);
   }
 
   public void RunAmp_SlidesDown() {

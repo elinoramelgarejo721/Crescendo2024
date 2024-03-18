@@ -70,12 +70,12 @@ public class RobotContainer {
   InstantCommand reset_to_abs = new InstantCommand(() -> {this.s_SwerveDrive.resetToAbsolute();}, this.s_SwerveDrive);
 
   // Left Climber
-  InstantCommand run_left_climber_up   = new InstantCommand(() -> {this.s_Climber.LeftRun(0.5); }, this.s_Climber);
-  InstantCommand run_left_climber_down = new InstantCommand(() -> {this.s_Climber.LeftRun(-0.5); }, this.s_Climber);
+  InstantCommand run_left_climber_up   = new InstantCommand(() -> {this.s_Climber.LeftRun(0.75); }, this.s_Climber);
+  InstantCommand run_left_climber_down = new InstantCommand(() -> {this.s_Climber.LeftRun(-0.75); }, this.s_Climber);
 
   // Right Climber
-  InstantCommand run_right_climber_up   = new InstantCommand(() -> {this.s_Climber.RightRun(0.5); }, this.s_Climber);
-  InstantCommand run_right_climber_down = new InstantCommand(() -> {this.s_Climber.RightRun(-0.5); }, this.s_Climber);
+  InstantCommand run_right_climber_up   = new InstantCommand(() -> {this.s_Climber.RightRun(0.75); }, this.s_Climber);
+  InstantCommand run_right_climber_down = new InstantCommand(() -> {this.s_Climber.RightRun(-0.75); }, this.s_Climber);
 
   // Launcher
   // InstantCommand amp     = new InstantCommand(() -> {this.s_Launcher.Run(this.driverController.getLeftTriggerAxis());}, this.s_Launcher);
@@ -150,11 +150,13 @@ public class RobotContainer {
     SmartDashboard.putData("Leave Auto", new PathPlannerAuto("Leave Auto"));
     SmartDashboard.putData("Spin Auto", new PathPlannerAuto("Spin Auto"));
 
-    // Zeroing the Modules
+    // Aligning the Modules
+    driverController.start().whileTrue(reset_to_abs);
     driverController.povUp().whileTrue(reset_to_abs);
 
     // Zeroing the IMU
-    driverController.start().whileTrue(new InstantCommand(()-> s_SwerveDrive.zero_imu()));
+    // driverController.start().whileTrue(new InstantCommand(()-> s_SwerveDrive.zero_imu()));
+    driverController.povDown().whileTrue(new InstantCommand(()-> s_SwerveDrive.zero_imu()));
 
     // Launcher
     // driverController.a().onTrue(new InstantCommand(() -> s_Launcher.RunAmp())).onFalse(new InstantCommand(() -> {s_Launcher.Off(); }, s_Launcher));
@@ -181,8 +183,8 @@ public class RobotContainer {
     // Slides 
     // driverController.y().onTrue(new RunCommand(() -> s_Slides.SlidesUp(), s_Slides)).onFalse(new InstantCommand(() -> {s_Slides.SlidesOff(); }, s_Slides));;
     // driverController.x().onTrue(new RunCommand(() -> s_Slides.SlidesDown(), s_Slides)).onFalse(new InstantCommand(() -> {s_Slides.SlidesOff(); }, s_Slides));
-    driverController.povRight().onTrue(increment_state).onFalse(new InstantCommand(() -> {s_Slides.SlidesOff(); }, s_Slides));
-    driverController.povLeft().onTrue(decrement_state).onFalse(new InstantCommand(() -> {s_Slides.SlidesOff(); }, s_Slides));
+    driverController.y().onTrue(increment_state).onFalse(new InstantCommand(() -> {s_Slides.SlidesOff(); }, s_Slides));
+    driverController.x().onTrue(decrement_state).onFalse(new InstantCommand(() -> {s_Slides.SlidesOff(); }, s_Slides));
 
     // new InstantCommand(() -> {s_Slides.SlidesOff(); }, s_Slides)
     // new InstantCommand(() -> {s_Slides.SlidesOff(); }, s_Slides)
