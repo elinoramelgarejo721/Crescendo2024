@@ -92,7 +92,17 @@ public class RobotContainer {
 
   private final Joystick driver = new Joystick(0);
 
-  // POV Button
+   /* Drive Controls */
+  // private final int translationAxis = XboxController.Axis.kLeftY.value;
+  // private final int strafeAxis = XboxController.Axis.kLeftX.value;
+  // private final int rotationAxis = XboxController.Axis.kRightX.value;
+
+  // private final JoystickButton zeroGyro =
+  //     new JoystickButton(driver, XboxController.Button.kBack.value);
+  // private final JoystickButton robotCentric =
+  //     new JoystickButton(driver, XboxController.Button.kStart.value);
+  
+  // // POV Button
   // private final POVButton povButton =
   //     new POVButton(new GenericHID(0), 0);
 
@@ -108,6 +118,16 @@ public class RobotContainer {
       () -> driverController.back().getAsBoolean()
       )
     );
+
+    // s_SwerveDrive.setDefaultCommand(
+    //   new TeleOpSwerve(
+    //   s_SwerveDrive, 
+    //   () -> -driver.getRawAxis(translationAxis), 
+    //   () -> -driver.getRawAxis(strafeAxis), 
+    //   () -> -driver.getRawAxis(rotationAxis),
+    //   () -> robotCentric.getAsBoolean()
+    //   )
+    // );
 
     s_Slides.setDefaultCommand(
       new DefaultSlides(s_Slides)

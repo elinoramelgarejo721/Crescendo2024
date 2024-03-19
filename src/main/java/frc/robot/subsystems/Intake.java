@@ -38,7 +38,7 @@ public class Intake extends SubsystemBase {
 
   // Intake
   public void intake() {
-    intake.set(0.75);
+    intake.set(1.0);
   }
 
   public void Outtake() {

@@ -29,8 +29,8 @@ import frc.robot.Constants;
 import frc.robot.Constants.SwerveModuleConstants;
 import frc.robot.Constants.SwerveConstants;
 import frc.robot.Constants.DriveConstants;
-import frc.robot.lib.util.CANSparkMaxUtil.Usage;
-import frc.robot.lib.util.CANSparkMaxUtil;
+// import frc.robot.lib.util.CANSparkMaxUtil.Usage;
+// import frc.robot.lib.util.CANSparkMaxUtil;
 
 // Java imports
 import java.util.*;
@@ -52,11 +52,11 @@ public class SwerveModule {
     private RelativeEncoder drive_encoder;
 
     private SparkPIDController angle_controller;
-    private SparkPIDController drive_controller;
+    private PIDController drive_controller;
 
-     private final SimpleMotorFeedforward feedforward =
-      new SimpleMotorFeedforward(
-          SwerveConstants.driveKS, SwerveConstants.driveKV, SwerveConstants.driveKA);
+    //  private final SimpleMotorFeedforward feedforward =
+    //   new SimpleMotorFeedforward(
+    //       SwerveConstants.driveKS, SwerveConstants.driveKV, SwerveConstants.driveKA);
     
     private SwerveModulePosition currentPosition = new SwerveModulePosition();
     private SwerveModuleState currentState = new SwerveModuleState();
@@ -81,12 +81,12 @@ public class SwerveModule {
 
         this.drive_motor = new CANSparkMax(module_constants.drive_motor_id, MotorType.kBrushless);
         this.drive_encoder = this.drive_motor.getEncoder();
-        // this.drive_controller = new PIDController(
-        //     SwerveConstants.drive_kP, 
-        //     SwerveConstants.drive_kI, 
-        //     SwerveConstants.drive_kD
-        //     );
-        this.drive_controller = this.drive_motor.getPIDController();
+        this.drive_controller = new PIDController(
+            SwerveConstants.drive_kP, 
+            SwerveConstants.drive_kI, 
+            SwerveConstants.drive_kD
+            );
+        // this.drive_controller = this.drive_motor.getPIDController();
         this.configDriveMotor();
 
         this.prev_angle = this.getState().angle;
@@ -112,7 +112,7 @@ public class SwerveModule {
         this.angle_controller.setI(SwerveConstants.angle_kI);
         this.angle_controller.setD(SwerveConstants.angle_kD);
         this.angle_controller.setFF(SwerveConstants.angle_kFF);
-        CANSparkMaxUtil.setCANSparkMaxBusUsage(angle_motor, Usage.kPositionOnly);
+        // CANSparkMaxUtil.setCANSparkMaxBusUsage(angle_motor, Usage.kPositionOnly);
         // this.angle_controller.enableContinuousInput(-180, 180);
 
         this.angle_motor.enableVoltageCompensation(SwerveConstants.voltage_comp);
@@ -134,7 +134,7 @@ public class SwerveModule {
         this.drive_controller.setP(SwerveConstants.drive_kP);
         this.drive_controller.setI(SwerveConstants.drive_kI);
         this.drive_controller.setD(SwerveConstants.drive_kD);
-        this.drive_controller.setFF(SwerveConstants.drive_kFF);
+        // this.drive_controller.setFF(SwerveConstants.drive_kFF);
 
         this.angle_motor.enableVoltageCompensation(SwerveConstants.voltage_comp);
         this.angle_motor.burnFlash();
@@ -167,14 +167,14 @@ public class SwerveModule {
 
         } else {
 
-            // this.drive_motor.setVoltage(
-            //     drive_controller.calculate(drive_encoder.getVelocity(), desired_state.speedMetersPerSecond)
-            // );
-            drive_controller.setReference(
-                desired_state.speedMetersPerSecond,
-                ControlType.kVelocity,
-                0,
-                feedforward.calculate(desired_state.speedMetersPerSecond));
+            this.drive_motor.setVoltage(
+                drive_controller.calculate(drive_encoder.getVelocity(), desired_state.speedMetersPerSecond)
+            );
+            // drive_controller.setReference(
+            //     desired_state.speedMetersPerSecond,
+            //     ControlType.kVelocity,
+            //     0,
+            //     feedforward.calculate(desired_state.speedMetersPerSecond));
         }
 
     }

@@ -119,9 +119,9 @@ public final class Constants {
     public static final double drive_kFF = 0.0;
 
     /* Drive Motor Characterization Values */
-    public static final double driveKS = 0.667;
-    public static final double driveKV = 2.44;
-    public static final double driveKA = 0.27;
+    // public static final double driveKS = 0.667;
+    // public static final double driveKV = 2.44;
+    // public static final double driveKA = 0.27;
 
     public static final double voltage_comp = 12.0;
 
@@ -140,54 +140,54 @@ public final class Constants {
 
     public static final SwerveDriveKinematics swerve_kinematics = new SwerveDriveKinematics(
       new Translation2d(-wheel_base / 2.0, track_width / 2.0),    // -+
-      new Translation2d(wheel_base / 2.0, track_width / 2.0),   // --
-      new Translation2d(-wheel_base / 2.0, -track_width / 2.0),     // ++ 
+      new Translation2d(-wheel_base / 2.0, -track_width / 2.0),   // --
+      new Translation2d(wheel_base / 2.0, track_width / 2.0),     // ++ 
       new Translation2d(wheel_base / 2.0, -track_width / 2.0)     // +-
     );
 
     // Took out angle offsets
-    // public static final SwerveModuleConstants[] module_constants = new SwerveModuleConstants[]{
-    //   new SwerveModuleConstants(DriveConstants.front_left_steer_id, DriveConstants.front_left_drive_id, DriveConstants.front_left_CANcoder_id),
-    //   new SwerveModuleConstants(DriveConstants.front_right_steer_id, DriveConstants.front_right_drive_id, DriveConstants.front_right_CANcoder_id),
-    //   new SwerveModuleConstants(DriveConstants.rear_left_steer_id, DriveConstants.rear_left_drive_id, DriveConstants.rear_left_CANcoder_id),
-    //   new SwerveModuleConstants(DriveConstants.rear_right_steer_id, DriveConstants.rear_right_drive_id, DriveConstants.rear_right_CANcoder_id),
-    // };
+    public static final SwerveModuleConstants[] module_constants = new SwerveModuleConstants[]{
+      new SwerveModuleConstants(DriveConstants.front_left_steer_id, DriveConstants.front_left_drive_id, DriveConstants.front_left_CANcoder_id),
+      new SwerveModuleConstants(DriveConstants.front_right_steer_id, DriveConstants.front_right_drive_id, DriveConstants.front_right_CANcoder_id),
+      new SwerveModuleConstants(DriveConstants.rear_left_steer_id, DriveConstants.rear_left_drive_id, DriveConstants.rear_left_CANcoder_id),
+      new SwerveModuleConstants(DriveConstants.rear_right_steer_id, DriveConstants.rear_right_drive_id, DriveConstants.rear_right_CANcoder_id),
+    };
     
     /* Front Left Module - Module 0 */
-    public static final class Mod0 {
-      public static final int driveMotorID = DriveConstants.front_left_drive_id;
-      public static final int angleMotorID = DriveConstants.front_left_steer_id;
-      public static final int canCoderID = DriveConstants.front_left_CANcoder_id;
-      public static final SwerveModuleConstants constants =
-          new SwerveModuleConstants(driveMotorID, angleMotorID, canCoderID);
-    }
+    // public static final class Mod0 {
+    //   public static final int driveMotorID = DriveConstants.front_left_drive_id;
+    //   public static final int angleMotorID = DriveConstants.front_left_steer_id;
+    //   public static final int canCoderID = DriveConstants.front_left_CANcoder_id;
+    //   public static final SwerveModuleConstants constants =
+    //       new SwerveModuleConstants(driveMotorID, angleMotorID, canCoderID);
+    // }
 
-    /* Front Right Module - Module 1 */
-    public static final class Mod1 {
-      public static final int driveMotorID = DriveConstants.front_right_drive_id;
-      public static final int angleMotorID = DriveConstants.front_right_steer_id;
-      public static final int canCoderID = DriveConstants.front_right_CANcoder_id;
-      public static final SwerveModuleConstants constants =
-          new SwerveModuleConstants(driveMotorID, angleMotorID, canCoderID);
-    }
+    // /* Front Right Module - Module 1 */
+    // public static final class Mod1 {
+    //   public static final int driveMotorID = DriveConstants.front_right_drive_id;
+    //   public static final int angleMotorID = DriveConstants.front_right_steer_id;
+    //   public static final int canCoderID = DriveConstants.front_right_CANcoder_id;
+    //   public static final SwerveModuleConstants constants =
+    //       new SwerveModuleConstants(driveMotorID, angleMotorID, canCoderID);
+    // }
 
-    /* Back Left Module - Module 2 */
-    public static final class Mod2 {
-      public static final int driveMotorID = DriveConstants.rear_left_drive_id;
-      public static final int angleMotorID = DriveConstants.rear_left_steer_id;
-      public static final int canCoderID = DriveConstants.rear_left_CANcoder_id;
-      public static final SwerveModuleConstants constants =
-          new SwerveModuleConstants(driveMotorID, angleMotorID, canCoderID);
-    }
+    // /* Back Left Module - Module 2 */
+    // public static final class Mod2 {
+    //   public static final int driveMotorID = DriveConstants.rear_left_drive_id;
+    //   public static final int angleMotorID = DriveConstants.rear_left_steer_id;
+    //   public static final int canCoderID = DriveConstants.rear_left_CANcoder_id;
+    //   public static final SwerveModuleConstants constants =
+    //       new SwerveModuleConstants(driveMotorID, angleMotorID, canCoderID);
+    // }
 
-    /* Back Right Module - Module 3 */
-    public static final class Mod3 {
-      public static final int driveMotorID = DriveConstants.rear_right_drive_id;
-      public static final int angleMotorID = DriveConstants.rear_right_steer_id;
-      public static final int canCoderID = DriveConstants.rear_right_CANcoder_id;
-      public static final SwerveModuleConstants constants =
-          new SwerveModuleConstants(driveMotorID, angleMotorID, canCoderID);
-    }
+    // /* Back Right Module - Module 3 */
+    // public static final class Mod3 {
+    //   public static final int driveMotorID = DriveConstants.rear_right_drive_id;
+    //   public static final int angleMotorID = DriveConstants.rear_right_steer_id;
+    //   public static final int canCoderID = DriveConstants.rear_right_CANcoder_id;
+    //   public static final SwerveModuleConstants constants =
+    //       new SwerveModuleConstants(driveMotorID, angleMotorID, canCoderID);
+    // }
 
     public static final HolonomicPathFollowerConfig pathFollowerConfig = new HolonomicPathFollowerConfig(
       new PIDConstants(50.0, 0, 0), // Translation constants 
