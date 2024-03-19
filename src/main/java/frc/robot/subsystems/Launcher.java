@@ -35,7 +35,7 @@ public class Launcher extends SubsystemBase {
 
   }
 
-  // Intake
+  // Launcher
   public void Run(double speed) {
     launcher.set(speed);
   }
