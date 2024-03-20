@@ -90,6 +90,8 @@ public class RobotContainer {
   private final CommandXboxController driverController =
       new CommandXboxController(ControllerConstants.driver_controller_id);
 
+  private final CommandXboxController driverController2 =
+      new CommandXboxController(1);
   private final Joystick driver = new Joystick(0);
 
    /* Drive Controls */
@@ -191,6 +193,10 @@ public class RobotContainer {
       ).onFalse(
         new SequentialCommandGroup(new InstantCommand(() -> {s_Launcher.Off(); }, s_Launcher), new InstantCommand(() -> {s_Intake.Off(); }, s_Intake))
       );
+
+    driverController2.a().onTrue(new InstantCommand(() -> s_Launcher.setSetpoint(0)));
+    driverController2.b().onTrue(new InstantCommand(() -> s_Launcher.setSetpoint(1000)));
+    driverController2.y().onTrue(new InstantCommand(() -> s_Launcher.setSetpoint(2000)));
     // driverController.x().onTrue(new InstantCommand(() -> s_Launcher.RunAmp_SlidesDown())).onFalse(new InstantCommand(() -> {s_Launcher.Off(); }, s_Launcher));
 
     // driverController.rightTrigger().onTrue(amp).onFalse(off);

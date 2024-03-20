@@ -225,11 +225,13 @@ public final class Constants {
   public static class LauncherConstants {
     public static final int launcher_id = 12;
 
-    public static final double launcher_kp  = 1.0;
+    public static final double launcher_kp  = 0.75;
     public static final double launcher_ki  = 0.0;
     public static final double launcher_kd  = 0.0;
     public static final double launcher_kFF = 0.0;
 
+    public static final double max_RPM      = 2000;
+    public static final double gear_ratio   = 3;
   }
 
   public static class SlidesConstants {
