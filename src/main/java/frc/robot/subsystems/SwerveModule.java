@@ -27,6 +27,7 @@ import com.ctre.phoenix6.configs.CANcoderConfiguration;
 // Custom imports
 import frc.robot.Constants;
 import frc.robot.Constants.SwerveModuleConstants;
+import frc.robot.lib.math.OnboardModuleState;
 import frc.robot.Constants.SwerveConstants;
 import frc.robot.Constants.DriveConstants;
 // import frc.robot.lib.util.CANSparkMaxUtil.Usage;
@@ -144,7 +145,7 @@ public class SwerveModule {
 
     public void setDesiredState(SwerveModuleState desired_state, boolean is_open_loop) {
 
-        desired_state = Constants.optimize(desired_state, this.getState().angle);
+        desired_state = OnboardModuleState.optimize(desired_state, getState().angle);
 
         this.setAngle(desired_state);
         this.setSpeed(desired_state, is_open_loop);

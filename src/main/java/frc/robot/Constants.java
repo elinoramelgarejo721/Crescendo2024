@@ -197,55 +197,6 @@ public final class Constants {
       new ReplanningConfig()
     );
   }
-
-  public static SwerveModuleState optimize(SwerveModuleState desired_state, Rotation2d current_angle) {
-
-    double target_angle = wrap_angle(current_angle.getDegrees(), desired_state.angle.getDegrees());
-    double target_speed = desired_state.speedMetersPerSecond;
-
-    double delta = target_angle - current_angle.getDegrees();
-
-    if (Math.abs(delta) > 90) {
-      target_speed = -target_speed;
-      target_angle = (delta > 90) ? (target_angle - 180) : (target_angle + 180);
-    }
-
-    return new SwerveModuleState(target_speed, Rotation2d.fromDegrees(target_angle));
-
-  }
-
-  public static double wrap_angle(double scope_reference, double angle) {
-
-    double lower_bound;
-    double upper_bound;
-    double lower_offset = scope_reference % 360;
-
-    if (lower_offset >= 0) {
-      lower_bound = scope_reference - lower_offset;
-      upper_bound = scope_reference + (360 - lower_offset);
-    } else {
-      upper_bound = scope_reference - lower_offset;
-      lower_bound = scope_reference - (360 + lower_offset);
-    }
-
-    while (angle < lower_bound) {
-      angle += 360;
-    }
-
-    while (angle > upper_bound) {
-      angle -= 360;
-    }
-
-    if (angle - scope_reference > 180) {
-      angle -= 360;
-    } else if (angle - scope_reference < -180) {
-      angle += 360;
-    }
-
-    return angle;
-
-  }
-
   public static class ControllerConstants {
 
     public static final int driver_controller_id = 0;

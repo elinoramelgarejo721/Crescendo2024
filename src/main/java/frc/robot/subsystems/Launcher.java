@@ -16,9 +16,9 @@ import frc.robot.Constants.LauncherConstants;
 public class Launcher extends SubsystemBase {
 
   // Left Climber
-  private CANSparkMax     launcher;
+  private CANSparkMax launcher;
   private RelativeEncoder launcherEncoder;
-  private PIDController   launcherPID;
+  private PIDController launcherPID;
 
   /** Creates a new ExampleSubsystem. */
   public Launcher() {
@@ -26,12 +26,16 @@ public class Launcher extends SubsystemBase {
     // Left Climber
     this.launcher = new CANSparkMax(LauncherConstants.launcher_id, MotorType.kBrushless);
     launcher.setInverted(false);
-    this.launcherPID = new PIDController(LauncherConstants.launcher_kp, LauncherConstants.launcher_ki, LauncherConstants.launcher_kd);
+    this.launcherPID = new PIDController(
+        LauncherConstants.launcher_kp,
+        LauncherConstants.launcher_ki,
+        LauncherConstants.launcher_kd);
+    this.launcherPID.setTolerance(200);
+    this.launcherPID.setSetpoint(0);
     this.launcherEncoder = launcher.getEncoder();
 
     Shuffleboard.getTab("Game").addDouble(
-        "Launcher" + "Pos", () -> launcherEncoder.getPosition()
-    );
+        "Launcher" + "Pos", () -> launcherEncoder.getPosition());
 
   }
 
@@ -56,9 +60,14 @@ public class Launcher extends SubsystemBase {
     launcher.set(0);
   }
 
+  public void setSetpoint(double setpoint) {
+    launcherPID.setSetpoint(setpoint);
+  }
+
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
+    launcher.set(launcherPID.calculate(launcherEncoder.getVelocity()/3));
   }
 
   @Override
