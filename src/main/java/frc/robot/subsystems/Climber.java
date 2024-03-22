@@ -46,12 +46,12 @@ public class Climber extends SubsystemBase {
     this.leftClimber.setSecondaryCurrentLimit(ClimberConstants.left_climber_current_limit);
     this.leftClimbEncoder.setPosition(0);
     this.left_PID = this.leftClimber.getPIDController();
-    this.left_PID.setP(ClimberConstants.lclimber_kp);
-    this.left_PID.setI(ClimberConstants.lclimber_ki);
-    this.left_PID.setD(ClimberConstants.lclimber_kd);
-    this.left_PID.setFF(ClimberConstants.lclimber_kFF);
+    this.left_PID.setP(ClimberConstants.climbers_kp);
+    this.left_PID.setI(ClimberConstants.climbers_ki);
+    this.left_PID.setD(ClimberConstants.climbers_kd);
+    this.left_PID.setFF(ClimberConstants.climbers_kFF);
 
-    this.lclimber_state = 0;
+    this.lclimber_state = 1;
 
     Shuffleboard.getTab("Game").addDouble(
         "Climber" + " LeftPos", () -> leftClimbEncoder.getPosition()
@@ -65,12 +65,12 @@ public class Climber extends SubsystemBase {
     this.rightClimber.setSecondaryCurrentLimit(ClimberConstants.right_climber_current_limit);
     this.rightClimbEncoder.setPosition(0);
     this.right_PID = this.rightClimber.getPIDController();
-    this.right_PID.setP(ClimberConstants.rclimber_kp);
-    this.right_PID.setI(ClimberConstants.rclimber_ki);
-    this.right_PID.setD(ClimberConstants.rclimber_kd);
-    this.right_PID.setFF(ClimberConstants.rclimber_kFF);
+    this.right_PID.setP(ClimberConstants.climbers_kp);
+    this.right_PID.setI(ClimberConstants.climbers_ki);
+    this.right_PID.setD(ClimberConstants.climbers_kd);
+    this.right_PID.setFF(ClimberConstants.climbers_kFF);
 
-    this.rclimber_state = 0;
+    this.rclimber_state = 1;
 
     Shuffleboard.getTab("Game").addDouble(
         "Climber" + " RightPos", () -> rightClimbEncoder.getPosition()
@@ -100,7 +100,7 @@ public class Climber extends SubsystemBase {
   }
 
   public void lcounterUp() {
-    if (this.lclimber_state == 1)
+    if (this.lclimber_state == 2)
       return;
     this.lclimber_state++;
   }
@@ -121,7 +121,7 @@ public class Climber extends SubsystemBase {
   }
 
   public void rcounterUp() {
-    if (this.rclimber_state == 1)
+    if (this.rclimber_state == 2)
       return;
     this.rclimber_state++;
   }

@@ -221,21 +221,20 @@ public final class Constants {
     public static final int left_climber_current_limit  = 40;
     public static final int right_climber_current_limit = 40;
 
-    // Left Climber
-    public static final double lclimber_kp  = 0.1;
-    public static final double lclimber_ki  = 0.0;
-    public static final double lclimber_kd  = 0.0;
-    public static final double lclimber_kFF = 0.0;
+    public static final double climbers_kp  = 0.15;
+    public static final double climbers_ki  = 0.0;
+    public static final double climbers_kd  = 0.0;
+    public static final double climbers_kFF = 0.0;
 
+    // Left Climber
+
+    public static final double lposition0 = -3;
     public static final double lposition1 = 0;
     public static final double lposition2 = 360;
 
     // Right Climber
-    public static final double rclimber_kp  = 0.1;
-    public static final double rclimber_ki  = 0.0;
-    public static final double rclimber_kd  = 0.0;
-    public static final double rclimber_kFF = 0.0;
 
+    public static final double rposition0 = -3;
     public static final double rposition1 = 0;
     public static final double rposition2 = 395;
 
