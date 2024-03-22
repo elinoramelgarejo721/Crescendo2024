@@ -47,6 +47,10 @@ public class DefaultClimbers extends Command {
         this.leftClimber.lrunToState(ClimberConstants.lposition2);
         break;
 
+      case 3:
+        this.leftClimber.lrunToState(ClimberConstants.lposition3);
+        break;
+
       default:
         break;
 
@@ -63,7 +67,11 @@ public class DefaultClimbers extends Command {
         break;
 
       case 2:
-        this.leftClimber.lrunToState(ClimberConstants.rposition2);
+        this.leftClimber.rrunToState(ClimberConstants.rposition2);
+        break;
+
+      case 3:
+        this.leftClimber.rrunToState(ClimberConstants.rposition3);
         break;
 
       default:

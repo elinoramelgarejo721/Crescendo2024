@@ -31,7 +31,7 @@ public class Launcher extends SubsystemBase {
         LauncherConstants.launcher_kp,
         LauncherConstants.launcher_ki,
         LauncherConstants.launcher_kd);
-    this.launcherPID.setTolerance(50);
+    this.launcherPID.setTolerance(0);
     this.launcherPID.setSetpoint(0);
     this.launcherEncoder = launcher.getEncoder();
 

@@ -54,10 +54,6 @@ public class SwerveModule {
 
     private SparkPIDController angle_controller;
     private PIDController drive_controller;
-
-    //  private final SimpleMotorFeedforward feedforward =
-    //   new SimpleMotorFeedforward(
-    //       SwerveConstants.driveKS, SwerveConstants.driveKV, SwerveConstants.driveKA);
     
     private SwerveModulePosition currentPosition = new SwerveModulePosition();
     private SwerveModuleState currentState = new SwerveModuleState();
@@ -65,18 +61,12 @@ public class SwerveModule {
     public SwerveModule(int module_number, SwerveModuleConstants module_constants) {
 
         this.module_number = module_number;
-        this.angle_offset = module_constants.angle_offset;
 
         this.can_coder = new CANcoder(module_constants.CANCoder_id);
         this.pos = this.can_coder.getAbsolutePosition();
 
         this.angle_motor = new CANSparkMax(module_constants.angle_motor_id, MotorType.kBrushless);
-        this.angle_encoder = this.angle_motor.getEncoder();        
-        // this.angle_controller = new PIDController(
-        //     SwerveConstants.angle_kP, 
-        //     SwerveConstants.angle_kI, 
-        //     SwerveConstants.angle_kD
-        //     );
+        this.angle_encoder = this.angle_motor.getEncoder(); 
         this.angle_controller = this.angle_motor.getPIDController();
         this.configAngleMotor();
 
@@ -87,7 +77,6 @@ public class SwerveModule {
             SwerveConstants.drive_kI, 
             SwerveConstants.drive_kD
             );
-        // this.drive_controller = this.drive_motor.getPIDController();
         this.configDriveMotor();
 
         this.prev_angle = this.getState().angle;
@@ -113,8 +102,6 @@ public class SwerveModule {
         this.angle_controller.setI(SwerveConstants.angle_kI);
         this.angle_controller.setD(SwerveConstants.angle_kD);
         this.angle_controller.setFF(SwerveConstants.angle_kFF);
-        // CANSparkMaxUtil.setCANSparkMaxBusUsage(angle_motor, Usage.kPositionOnly);
-        // this.angle_controller.enableContinuousInput(-180, 180);
 
         this.angle_motor.enableVoltageCompensation(SwerveConstants.voltage_comp);
         this.angle_motor.burnFlash();
@@ -135,7 +122,6 @@ public class SwerveModule {
         this.drive_controller.setP(SwerveConstants.drive_kP);
         this.drive_controller.setI(SwerveConstants.drive_kI);
         this.drive_controller.setD(SwerveConstants.drive_kD);
-        // this.drive_controller.setFF(SwerveConstants.drive_kFF);
 
         this.angle_motor.enableVoltageCompensation(SwerveConstants.voltage_comp);
         this.angle_motor.burnFlash();
@@ -171,11 +157,7 @@ public class SwerveModule {
             this.drive_motor.setVoltage(
                 drive_controller.calculate(drive_encoder.getVelocity(), desired_state.speedMetersPerSecond)
             );
-            // drive_controller.setReference(
-            //     desired_state.speedMetersPerSecond,
-            //     ControlType.kVelocity,
-            //     0,
-            //     feedforward.calculate(desired_state.speedMetersPerSecond));
+
         }
 
     }

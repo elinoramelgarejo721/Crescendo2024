@@ -51,7 +51,7 @@ public class Slides extends SubsystemBase {
     this.bottomlimitSwitch = new DigitalInput(0);
     this.toplimitSwitch    = new DigitalInput(1);
     
-    this.slides_state = 0;
+    this.slides_state = 1;
 
     Shuffleboard.getTab("Game").addDouble(
         "Slides" + "Pos", () -> getPosition()

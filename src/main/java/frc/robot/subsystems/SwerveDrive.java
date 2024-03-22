@@ -24,6 +24,7 @@ import com.ctre.phoenix.sensors.PigeonIMU;
 import com.ctre.phoenix6.hardware.Pigeon2;
 import com.pathplanner.lib.auto.AutoBuilder;
 
+import frc.robot.Constants.AutoConstants;
 // Custom imports
 import frc.robot.Constants.DriveConstants;
 import frc.robot.Constants.SwerveConstants;
@@ -47,7 +48,7 @@ public class SwerveDrive extends SubsystemBase {
       this::resetOdometry, 
       this::getSpeeds, 
       this::driveRobotRelative, 
-      Constants.SwerveConstants.pathFollowerConfig,
+      AutoConstants.pathFollowerConfig,
       () -> {
           // Boolean supplier that controls when the path will be mirrored for the red alliance
           // This will flip the path being followed to the red side of the field.

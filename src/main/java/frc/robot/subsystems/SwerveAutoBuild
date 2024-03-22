@@ -5,31 +5,32 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix6.hardware.Pigeon2;
+
 import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.util.PathPlannerLogging;
 
+// WPI Imports
 import edu.wpi.first.math.geometry.Pose2d;
-import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
 import edu.wpi.first.math.kinematics.SwerveDriveOdometry;
 import edu.wpi.first.math.kinematics.SwerveModulePosition;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
+// import edu.wpi.first.math.kinematics.SwerveModuleState;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.smartdashboard.Field2d;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
-// Robot Files
-import frc.robot.Constants;
+// Robot Imports
+import frc.robot.Constants.AutoConstants;
 import frc.robot.Constants.DriveConstants;
-import frc.robot.Constants.SwerveConstants;
-import frc.robot.subsystems.SwerveDrive;
 
 /**
  * Basic simulation of a swerve subsystem with the methods needed by PathPlanner
  */
 public class SwerveAutoBuild extends SubsystemBase {
+
   private SwerveModule[] modules;
   private SwerveDriveKinematics kinematics;
   private SwerveDriveOdometry odometry;
@@ -39,21 +40,24 @@ public class SwerveAutoBuild extends SubsystemBase {
   private Field2d field = new Field2d();
   
   public SwerveAutoBuild() {
+
     gyro = new Pigeon2(DriveConstants.pigeon_id);
-    modules = 
-    //new SwerveModule[]{
-    //   new SwerveModule(0, SwerveConstants.module_constants[0]),
-    //   new SwerveModule(1, SwerveConstants.module_constants[1]),
-    //   new SwerveModule(2, SwerveConstants.module_constants[2]),
-    //   new SwerveModule(3, SwerveConstants.module_constants[3])
-    // };
+
     kinematics = new SwerveDriveKinematics(
-      SwerveConstants.flModuleOffset, 
-      SwerveConstants.frModuleOffset, 
-      SwerveConstants.blModuleOffset, 
-      SwerveConstants.brModuleOffset
+      AutoConstants.flModuleOffset, 
+      AutoConstants.frModuleOffset, 
+      AutoConstants.blModuleOffset, 
+      AutoConstants.brModuleOffset
     );
+
     odometry = new SwerveDriveOdometry(kinematics, gyro.getRotation2d(), getPositions());
+
+    this.modules = new SwerveModule[]{
+      new SwerveModule(0, AutoConstants.Mod0.constants),
+      new SwerveModule(1, AutoConstants.Mod1.constants),
+      new SwerveModule(2, AutoConstants.Mod2.constants),
+      new SwerveModule(3, AutoConstants.Mod3.constants) 
+    };
 
     // Configure AutoBuilder
     AutoBuilder.configureHolonomic(
@@ -61,7 +65,7 @@ public class SwerveAutoBuild extends SubsystemBase {
       this::resetPose, 
       this::getSpeeds, 
       this::driveRobotRelative, 
-      SwerveConstants.pathFollowerConfig,
+      AutoConstants.pathFollowerConfig,
       () -> {
           // Boolean supplier that controls when the path will be mirrored for the red alliance
           // This will flip the path being followed to the red side of the field.
@@ -80,16 +84,12 @@ public class SwerveAutoBuild extends SubsystemBase {
     PathPlannerLogging.setLogActivePathCallback((poses) -> field.getObject("path").setPoses(poses));
 
     SmartDashboard.putData("Field", field);
+
   }
 
   @Override
   public void periodic() {
-    // Update the simulated gyro, not needed in a real project
-    gyro.getYaw();
-
-    odometry.update(gyro.getRotation2d(), getPositions());
-
-    field.setRobotPose(getPose());
+    
   }
 
   public Pose2d getPose() {
@@ -116,7 +116,7 @@ public class SwerveAutoBuild extends SubsystemBase {
   }
 
   public void setStates(SwerveModuleState[] targetStates) {
-    SwerveDriveKinematics.desaturateWheelSpeeds(targetStates, SwerveConstants.maxSpeed);
+    SwerveDriveKinematics.desaturateWheelSpeeds(targetStates, AutoConstants.maxModuleSpeed);
 
     for (int i = 0; i < modules.length; i++) {
       modules[i].setTargetState(targetStates[i]);
@@ -139,41 +139,4 @@ public class SwerveAutoBuild extends SubsystemBase {
     return positions;
   }
 
-  /**
-   * Basic simulation of a swerve module, will just hold its current state and not use any hardware
-   */
-  class SimSwerveModule {
-    private SwerveModulePosition currentPosition = new SwerveModulePosition();
-    private SwerveModuleState currentState = new SwerveModuleState();
-
-    public SwerveModulePosition getPosition() {
-      return currentPosition;
-    }
-
-    public SwerveModuleState getState() {
-      return currentState;
-    }
-
-    public void setTargetState(SwerveModuleState targetState) {
-      // Optimize the state
-      currentState = SwerveModuleState.optimize(targetState, currentState.angle);
-
-      currentPosition = new SwerveModulePosition(currentPosition.distanceMeters + (currentState.speedMetersPerSecond * 0.02), currentState.angle);
-    }
-  }
-
-  /**
-   * Basic simulation of a gyro, will just hold its current state and not use any hardware
-   */
-  class SimGyro {
-    private Rotation2d currentRotation = new Rotation2d();
-
-    public Rotation2d getRotation2d() {
-      return currentRotation;
-    }
-
-    public void updateRotation(double angularVelRps){
-      currentRotation = currentRotation.plus(new Rotation2d(angularVelRps * 0.02));
-    }
-  }
 }

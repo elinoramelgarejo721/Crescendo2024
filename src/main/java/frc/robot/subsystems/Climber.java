@@ -100,7 +100,7 @@ public class Climber extends SubsystemBase {
   }
 
   public void lcounterUp() {
-    if (this.lclimber_state == 2)
+    if (this.lclimber_state == 3)
       return;
     this.lclimber_state++;
   }
@@ -121,7 +121,7 @@ public class Climber extends SubsystemBase {
   }
 
   public void rcounterUp() {
-    if (this.rclimber_state == 2)
+    if (this.rclimber_state == 3)
       return;
     this.rclimber_state++;
   }
