@@ -93,7 +93,7 @@ public final class Constants {
   public static class SwerveConstants {
     
     public static final boolean angle_invert = false;
-    public static final boolean drive_invert = false;
+    public static final boolean drive_invert = true;
 
     public static final IdleMode angle_idle_mode = IdleMode.kBrake;
     public static final IdleMode drive_idle_mode = IdleMode.kBrake;
@@ -138,6 +138,13 @@ public final class Constants {
       new Translation2d(wheel_base / 2.0, track_width / 2.0),     // ++ 
       new Translation2d(wheel_base / 2.0, -track_width / 2.0)     // +-
     );
+
+    // public static final SwerveDriveKinematics swerve_kinematics = new SwerveDriveKinematics(
+    //   AutoConstants.flModuleOffset,
+    //   AutoConstants.frModuleOffset,
+    //   AutoConstants.blModuleOffset,
+    //   AutoConstants.brModuleOffset
+    // );
 
     // Took out angle offsets
     public static final SwerveModuleConstants[] module_constants = new SwerveModuleConstants[]{
@@ -202,7 +209,7 @@ public final class Constants {
     public static final double launcher_kd  = 0.0;
     public static final double launcher_kFF = 0.0;
 
-    public static final double max_RPM      = 4000; //5676
+    public static final double max_RPM      = 5676; //5676
     public static final double gear_ratio   = 3;
   }
 
@@ -225,10 +232,10 @@ public final class Constants {
   public static class AutoConstants {
 
     // Auto
-    public static final Translation2d flModuleOffset = new Translation2d(-0.7366, 0.7366);
-    public static final Translation2d frModuleOffset = new Translation2d(0.7366, 0.7366);
-    public static final Translation2d blModuleOffset = new Translation2d(-0.7366, -0.7366);
-    public static final Translation2d brModuleOffset = new Translation2d(0.7366, -0.7366);
+    public static final Translation2d flModuleOffset = new Translation2d(0.7366, 0.7366);
+    public static final Translation2d frModuleOffset = new Translation2d(0.7366, -0.7366);
+    public static final Translation2d blModuleOffset = new Translation2d(-0.7366, 0.7366);
+    public static final Translation2d brModuleOffset = new Translation2d(-0.7366, -0.7366);
 
     /* Front Left Module - Module 0 */
     public static final class Mod0 {
@@ -236,7 +243,7 @@ public final class Constants {
       public static final int angleMotorID = DriveConstants.front_left_steer_id;
       public static final int canCoderID = DriveConstants.front_left_CANcoder_id;
       public static final SwerveModuleConstants constants =
-          new SwerveModuleConstants(driveMotorID, angleMotorID, canCoderID);
+          new SwerveModuleConstants(angleMotorID, driveMotorID, canCoderID);
     }
 
     /* Front Right Module - Module 1 */
@@ -245,7 +252,7 @@ public final class Constants {
       public static final int angleMotorID = DriveConstants.front_right_steer_id;
       public static final int canCoderID = DriveConstants.front_right_CANcoder_id;
       public static final SwerveModuleConstants constants =
-          new SwerveModuleConstants(driveMotorID, angleMotorID, canCoderID);
+          new SwerveModuleConstants(angleMotorID, driveMotorID, canCoderID);
     }
 
     /* Back Left Module - Module 2 */
@@ -254,7 +261,7 @@ public final class Constants {
       public static final int angleMotorID = DriveConstants.rear_left_steer_id;
       public static final int canCoderID = DriveConstants.rear_left_CANcoder_id;
       public static final SwerveModuleConstants constants =
-          new SwerveModuleConstants(driveMotorID, angleMotorID, canCoderID);
+          new SwerveModuleConstants(angleMotorID, driveMotorID, canCoderID);
     }
 
     /* Back Right Module - Module 3 */
@@ -263,14 +270,14 @@ public final class Constants {
       public static final int angleMotorID = DriveConstants.rear_right_steer_id;
       public static final int canCoderID = DriveConstants.rear_right_CANcoder_id;
       public static final SwerveModuleConstants constants =
-          new SwerveModuleConstants(driveMotorID, angleMotorID, canCoderID);
+          new SwerveModuleConstants(angleMotorID, driveMotorID, canCoderID);
     }
 
     public static final double maxModuleSpeed = 4.5;
 
     public static final HolonomicPathFollowerConfig pathFollowerConfig = new HolonomicPathFollowerConfig(
-      new PIDConstants(5.0, 0, 0), // Translation constants 
-      new PIDConstants(5.0, 0, 0), // Rotation constants 
+      new PIDConstants(5.0, 0.01, 0), // Translation constants 
+      new PIDConstants(3.1, 0, 0), // Rotation constants 
       maxModuleSpeed, 
       flModuleOffset.getNorm(), // Drive base radius (distance from center to furthest module) 
       new ReplanningConfig()

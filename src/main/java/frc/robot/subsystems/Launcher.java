@@ -68,8 +68,8 @@ public class Launcher extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-    launcher.set(launcherPID.calculateForPercent(launcherEncoder.getVelocity()/LauncherConstants.gear_ratio, LauncherConstants.max_RPM));
-    SmartDashboard.putNumber("LauncherRPM", launcherEncoder.getVelocity()/LauncherConstants.gear_ratio);
+    launcher.set(launcherPID.calculateForPercent(launcherEncoder.getVelocity(), LauncherConstants.max_RPM));
+    SmartDashboard.putNumber("LauncherRPM", launcherEncoder.getVelocity());
   }
 
   @Override

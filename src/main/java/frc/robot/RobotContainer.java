@@ -35,6 +35,7 @@ import com.pathplanner.lib.auto.CommandUtil;
 
 // Subsystems
 import frc.robot.subsystems.SwerveDrive;
+import frc.robot.subsystems.SwerveModule;
 // import frc.robot.subsystems.SwerveAutoBuild;
 import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.Intake;
@@ -57,11 +58,11 @@ import frc.robot.commands.TeleOpSwerve;
 public class RobotContainer {
 
   // Subsystems
-  private final SwerveDrive s_SwerveDrive = new SwerveDrive();
-  private final Climber         s_Climber = new Climber();
-  private final Intake          s_Intake  = new Intake();
-  private final Launcher       s_Launcher = new Launcher();
-  private final Slides           s_Slides = new Slides();
+  private final SwerveDrive s_SwerveDrive   = new SwerveDrive();
+  private final Climber         s_Climber   = new Climber();
+  private final Intake          s_Intake    = new Intake();
+  private final Launcher       s_Launcher   = new Launcher();
+  private final Slides           s_Slides   = new Slides();
 
   private final SendableChooser<Command> autoChooser;
 
@@ -121,16 +122,16 @@ public class RobotContainer {
     s_SwerveDrive.setDefaultCommand(
       new TeleOpSwerve(
       s_SwerveDrive, 
-      () -> driverController.getLeftY(), 
-      () -> -driverController.getLeftX(), 
-      () -> driverController.getRightX(),
+      () -> -driverController.getLeftY(), 
+      () -> driverController.getLeftX(), 
+      () -> -driverController.getRightX(),
       () -> driverController.back().getAsBoolean()
       )
     );
 
     // s_SwerveDrive.setDefaultCommand(
     //   new TeleOpSwerve(
-    //   s_SwerveDrive, 
+      // s_SwerveDrive, 
     //   () -> -driver.getRawAxis(translationAxis), 
     //   () -> -driver.getRawAxis(strafeAxis), 
     //   () -> -driver.getRawAxis(rotationAxis),
@@ -147,9 +148,11 @@ public class RobotContainer {
     // );
 
     // Register Named Commands
-    NamedCommands.registerCommand("RunSpeaker", new SequentialCommandGroup(new InstantCommand(() -> s_Launcher.RunSpeaker()), new InstantCommand(() -> s_Intake.intake())));
+    NamedCommands.registerCommand("RunSpeaker", new SequentialCommandGroup(new InstantCommand(() -> s_Launcher.setSetpoint(2000)), new InstantCommand(() -> s_Intake.intake())));
+    NamedCommands.registerCommand("SpeakerDone", new SequentialCommandGroup(new InstantCommand(() -> s_Launcher.setSetpoint(0)), new InstantCommand(() -> s_Intake.Off())));
     NamedCommands.registerCommand("IntakeOff", new InstantCommand(() -> s_Intake.Off()));
-    NamedCommands.registerCommand("LauncherOff", new InstantCommand(() -> s_Launcher.Off()));
+    NamedCommands.registerCommand("Intake", new InstantCommand(() -> s_Intake.intake()));
+    NamedCommands.registerCommand("LauncherOff", new InstantCommand(() -> s_Launcher.setSetpoint(0)));
     NamedCommands.registerCommand("ResetModules", new InstantCommand(() -> s_SwerveDrive.resetToAbsolute()));
     NamedCommands.registerCommand("ResetPigeon", new InstantCommand(() -> s_SwerveDrive.zero_imu()));
 
@@ -171,9 +174,6 @@ public class RobotContainer {
    * joysticks}.
    */
   private void configureBindings() {
-
-    SmartDashboard.putData("Leave Auto", new PathPlannerAuto("Leave Auto"));
-    SmartDashboard.putData("Spin Auto", new PathPlannerAuto("Spin Auto"));
 
     // Aligning the Modules
     driverController.start().whileTrue(reset_to_abs);
@@ -199,7 +199,7 @@ public class RobotContainer {
       );
     driverController.b().onTrue(
         new SequentialCommandGroup(
-          new InstantCommand(() -> s_Launcher.setSetpoint(2000)), 
+          new InstantCommand(() -> s_Launcher.setSetpoint(6000)), 
           new InstantCommand(() -> s_Intake.intake())
         )
       ).onFalse(

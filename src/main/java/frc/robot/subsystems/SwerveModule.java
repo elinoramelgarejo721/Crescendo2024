@@ -84,7 +84,7 @@ public class SwerveModule {
     }
 
     public void resetToAbsolute() {
-        Double absolutePosition = getCANDouble();
+        Double absolutePosition = getCANCoder();
         angle_encoder.setPosition(absolutePosition);
     }
 
@@ -102,6 +102,10 @@ public class SwerveModule {
         this.angle_controller.setI(SwerveConstants.angle_kI);
         this.angle_controller.setD(SwerveConstants.angle_kD);
         this.angle_controller.setFF(SwerveConstants.angle_kFF);
+        this.angle_controller.setPositionPIDWrappingEnabled(true);
+        this.angle_controller.setPositionPIDWrappingMaxInput(180);
+        this.angle_controller.setPositionPIDWrappingMinInput(-180);
+
 
         this.angle_motor.enableVoltageCompensation(SwerveConstants.voltage_comp);
         this.angle_motor.burnFlash();
@@ -191,8 +195,8 @@ public class SwerveModule {
 
     }
 
-    public Rotation2d getCANCoder() {
-        return Rotation2d.fromDegrees(this.can_coder.getAbsolutePosition().getValue() * 360);
+    public Double getCANCoder() {
+        return this.can_coder.getAbsolutePosition().getValueAsDouble() * 360;
     }
 
     public Double getCANDouble() {
