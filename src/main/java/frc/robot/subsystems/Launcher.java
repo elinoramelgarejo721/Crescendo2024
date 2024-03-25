@@ -3,6 +3,7 @@ package frc.robot.subsystems;
 
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.RelativeEncoder;
+import com.revrobotics.CANSparkBase.IdleMode;
 import com.revrobotics.CANSparkLowLevel.MotorType;
 
 import frc.robot.lib.util.PIDController;
@@ -27,6 +28,7 @@ public class Launcher extends SubsystemBase {
     // Left Climber
     this.launcher = new CANSparkMax(LauncherConstants.launcher_id, MotorType.kBrushless);
     launcher.setInverted(false);
+    launcher.setIdleMode(IdleMode.kBrake);
     this.launcherPID = new PIDController(
         LauncherConstants.launcher_kp,
         LauncherConstants.launcher_ki,
@@ -46,7 +48,7 @@ public class Launcher extends SubsystemBase {
   }
 
   public void RunAmp() {
-    launcher.set(0.4);
+    launcherPID.setSetpoint(LauncherConstants.Amp);
   }
 
   public void RunAmp_SlidesDown() {
@@ -54,11 +56,11 @@ public class Launcher extends SubsystemBase {
   }
 
   public void RunSpeaker() {
-    launcher.set(1);
+    launcherPID.setSetpoint(LauncherConstants.Speaker);
   }
 
   public void Off() {
-    launcher.set(0);
+    launcherPID.setSetpoint(LauncherConstants.Off);
   }
 
   public void setSetpoint(double setpoint) {

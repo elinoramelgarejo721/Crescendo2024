@@ -148,11 +148,12 @@ public class RobotContainer {
     // );
 
     // Register Named Commands
-    NamedCommands.registerCommand("RunSpeaker", new SequentialCommandGroup(new InstantCommand(() -> s_Launcher.setSetpoint(2000)), new InstantCommand(() -> s_Intake.intake())));
-    NamedCommands.registerCommand("SpeakerDone", new SequentialCommandGroup(new InstantCommand(() -> s_Launcher.setSetpoint(0)), new InstantCommand(() -> s_Intake.Off())));
+    NamedCommands.registerCommand("RunSpeaker", new SequentialCommandGroup(new InstantCommand(() -> s_Launcher.RunSpeaker()), new InstantCommand(() -> s_Intake.feedToLauncher())));
+    NamedCommands.registerCommand("RunAmp", new SequentialCommandGroup(new InstantCommand(() -> s_Launcher.RunAmp()), new InstantCommand(() -> s_Intake.feedToLauncher())));
+    NamedCommands.registerCommand("SpeakerDone", new SequentialCommandGroup(new InstantCommand(() -> s_Launcher.Off()), new InstantCommand(() -> s_Intake.Off())));
     NamedCommands.registerCommand("IntakeOff", new InstantCommand(() -> s_Intake.Off()));
     NamedCommands.registerCommand("Intake", new InstantCommand(() -> s_Intake.intake()));
-    NamedCommands.registerCommand("LauncherOff", new InstantCommand(() -> s_Launcher.setSetpoint(0)));
+    NamedCommands.registerCommand("LauncherOff", new InstantCommand(() -> s_Launcher.Off()));
     NamedCommands.registerCommand("ResetModules", new InstantCommand(() -> s_SwerveDrive.resetToAbsolute()));
     NamedCommands.registerCommand("ResetPigeon", new InstantCommand(() -> s_SwerveDrive.zero_imu()));
 
@@ -188,23 +189,23 @@ public class RobotContainer {
     // driverController.b().onTrue(new InstantCommand(() -> s_Launcher.RunSpeaker())).onFalse(new InstantCommand(() -> {s_Launcher.Off(); }, s_Launcher));
     driverController.a().onTrue(
         new SequentialCommandGroup(
-          new InstantCommand(() -> s_Launcher.setSetpoint(1000)), 
-          new InstantCommand(() -> s_Intake.intake())
+          new InstantCommand(() -> s_Launcher.RunAmp()), 
+          new InstantCommand(() -> s_Intake.feedToLauncher())
         )
       ).onFalse(
         new SequentialCommandGroup(
-          new InstantCommand(() -> {s_Launcher.setSetpoint(0); }, s_Launcher), 
+          new InstantCommand(() -> {s_Launcher.Off(); }, s_Launcher), 
           new InstantCommand(() -> {s_Intake.Off(); }, s_Intake)
         )
       );
     driverController.b().onTrue(
         new SequentialCommandGroup(
-          new InstantCommand(() -> s_Launcher.setSetpoint(6000)), 
-          new InstantCommand(() -> s_Intake.intake())
+          new InstantCommand(() -> s_Launcher.RunSpeaker()), 
+          new InstantCommand(() -> s_Intake.feedToLauncher())
         )
       ).onFalse(
         new SequentialCommandGroup(
-          new InstantCommand(() -> {s_Launcher.setSetpoint(0); }, s_Launcher), 
+          new InstantCommand(() -> {s_Launcher.Off(); }, s_Launcher), 
           new InstantCommand(() -> {s_Intake.Off(); }, s_Intake)
         )
       );

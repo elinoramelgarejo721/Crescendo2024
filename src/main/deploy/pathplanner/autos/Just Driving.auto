@@ -2,10 +2,10 @@
   "version": 1.0,
   "startingPose": {
     "position": {
-      "x": 1.29,
-      "y": 5.58
+      "x": 1.27,
+      "y": 5.57
     },
-    "rotation": 0.0
+    "rotation": 0
   },
   "command": {
     "type": "sequential",
@@ -18,70 +18,21 @@
           }
         },
         {
+          "type": "path",
+          "data": {
+            "pathName": "Leave & Strafe"
+          }
+        },
+        {
           "type": "wait",
           "data": {
-            "waitTime": 0.25
+            "waitTime": 2.0
           }
         },
         {
           "type": "named",
           "data": {
-            "name": "RunSpeaker"
-          }
-        },
-        {
-          "type": "wait",
-          "data": {
-            "waitTime": 0.5
-          }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": "SpeakerDone"
-          }
-        },
-        {
-          "type": "parallel",
-          "data": {
-            "commands": [
-              {
-                "type": "path",
-                "data": {
-                  "pathName": "Leave & Strafe"
-                }
-              },
-              {
-                "type": "wait",
-                "data": {
-                  "waitTime": 1.5
-                }
-              },
-              {
-                "type": "named",
-                "data": {
-                  "name": "Intake"
-                }
-              }
-            ]
-          }
-        },
-        {
-          "type": "wait",
-          "data": {
-            "waitTime": 0.5
-          }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": "IntakeOff"
-          }
-        },
-        {
-          "type": "wait",
-          "data": {
-            "waitTime": 4.5
+            "name": "ResetModules"
           }
         },
         {
@@ -91,21 +42,81 @@
           }
         },
         {
+          "type": "wait",
+          "data": {
+            "waitTime": 3.0
+          }
+        },
+        {
           "type": "named",
           "data": {
-            "name": "RunSpeaker"
+            "name": "ResetModules"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Middle Spike Mark"
           }
         },
         {
           "type": "wait",
           "data": {
-            "waitTime": 1.0
+            "waitTime": 3.25
           }
         },
         {
           "type": "named",
           "data": {
-            "name": "SpeakerDone"
+            "name": "ResetModules"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Middle Spike Mark Back To Speaker"
+          }
+        },
+        {
+          "type": "wait",
+          "data": {
+            "waitTime": 5.0
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "ResetModules"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Speaker to Left Spike Mark"
+          }
+        },
+        {
+          "type": "wait",
+          "data": {
+            "waitTime": 3.5
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "ResetModules"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Left Spike Mark Back to Speaker"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "ResetModules"
           }
         }
       ]

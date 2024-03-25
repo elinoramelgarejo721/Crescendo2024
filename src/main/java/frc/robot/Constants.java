@@ -168,9 +168,18 @@ public final class Constants {
   public static class IntakeConstants {
     public static final int intake_id = 10;
 
-    public static final double intake_kp = 0.1;
+    public static final double intake_kp = 0.5;
     public static final double intake_ki = 0.0;
     public static final double intake_kd = 0.0;
+
+    public static final double max_RPM      = 5676; //5676
+
+    // Setpoint Constants
+    public static final double intakeSetpoint   = 6000;
+    public static final double outtakeSetpoint  = -6000;
+    public static final double feedToLauncher   = 6000;
+    public static final double Off              = 0;
+
   }
 
   public static class ClimberConstants {
@@ -208,6 +217,11 @@ public final class Constants {
     public static final double launcher_ki  = 0.0;
     public static final double launcher_kd  = 0.0;
     public static final double launcher_kFF = 0.0;
+
+    // Setpoint Constants
+    public static final double Amp      = 2000;
+    public static final double Speaker  = 6000;
+    public static final double Off      = 0;
 
     public static final double max_RPM      = 5676; //5676
     public static final double gear_ratio   = 3;
@@ -276,8 +290,8 @@ public final class Constants {
     public static final double maxModuleSpeed = 4.5;
 
     public static final HolonomicPathFollowerConfig pathFollowerConfig = new HolonomicPathFollowerConfig(
-      new PIDConstants(5.0, 0.01, 0), // Translation constants 
-      new PIDConstants(3.1, 0, 0), // Rotation constants 
+      new PIDConstants(5.0, 0.0, 0.0), // Translation constants 
+      new PIDConstants(5.0, 0.0, 0.0), // Rotation constants 
       maxModuleSpeed, 
       flModuleOffset.getNorm(), // Drive base radius (distance from center to furthest module) 
       new ReplanningConfig()
