@@ -82,13 +82,9 @@ public class RobotContainer {
   InstantCommand run_right_climber_up   = new InstantCommand( () -> {this.s_Climber.RightRun(0.75); }, this.s_Climber );
   InstantCommand run_right_climber_down = new InstantCommand( () -> {this.s_Climber.RightRun(-0.75); }, this.s_Climber );
 
+  // Left Climber
   InstantCommand lClimber_increment_state = new InstantCommand( () -> {this.s_Climber.lcounterUp();} );
   InstantCommand lClimber_decrement_state = new InstantCommand( () -> {this.s_Climber.lcounterDown();} );
-
-  // Launcher
-  // InstantCommand amp     = new InstantCommand(() -> {this.s_Launcher.Run(this.driverController.getLeftTriggerAxis());}, this.s_Launcher);
-  // InstantCommand speaker = new InstantCommand(() -> {this.s_Launcher.Run(-this.driverController.getRightTriggerAxis());}, this.s_Launcher);
-  // InstantCommand off     = new InstantCommand(() -> {this.s_Launcher.Run(0);}, this.s_Launcher);
 
   // Slides
   InstantCommand slides_increment_state = new InstantCommand( () -> {this.s_Slides.counterUp();} );
@@ -100,21 +96,6 @@ public class RobotContainer {
 
   private final CommandXboxController driverController2 =
       new CommandXboxController(1);
-  private final Joystick driver = new Joystick(0);
-
-   /* Drive Controls */
-  // private final int translationAxis = XboxController.Axis.kLeftY.value;
-  // private final int strafeAxis = XboxController.Axis.kLeftX.value;
-  // private final int rotationAxis = XboxController.Axis.kRightX.value;
-
-  // private final JoystickButton zeroGyro =
-  //     new JoystickButton(driver, XboxController.Button.kBack.value);
-  // private final JoystickButton robotCentric =
-  //     new JoystickButton(driver, XboxController.Button.kStart.value);
-  
-  // // POV Button
-  // private final POVButton povButton =
-  //     new POVButton(new GenericHID(0), 0);
 
   /** The container for the robot. Contains subsystems, IO devices, and commands. */
   public RobotContainer() {
@@ -129,16 +110,6 @@ public class RobotContainer {
       )
     );
 
-    // s_SwerveDrive.setDefaultCommand(
-    //   new TeleOpSwerve(
-      // s_SwerveDrive, 
-    //   () -> -driver.getRawAxis(translationAxis), 
-    //   () -> -driver.getRawAxis(strafeAxis), 
-    //   () -> -driver.getRawAxis(rotationAxis),
-    //   () -> robotCentric.getAsBoolean()
-    //   )
-    // );
-
     s_Slides.setDefaultCommand(
       new DefaultSlides(s_Slides)
     );
@@ -152,6 +123,8 @@ public class RobotContainer {
     NamedCommands.registerCommand("RunAmp", new SequentialCommandGroup(new InstantCommand(() -> s_Launcher.RunAmp()), new InstantCommand(() -> s_Intake.feedToLauncher())));
     NamedCommands.registerCommand("SpeakerDone", new SequentialCommandGroup(new InstantCommand(() -> s_Launcher.Off()), new InstantCommand(() -> s_Intake.Off())));
     NamedCommands.registerCommand("IntakeOff", new InstantCommand(() -> s_Intake.Off()));
+    NamedCommands.registerCommand("SlidesUp", slides_increment_state);
+    NamedCommands.registerCommand("SlidesDown", slides_decrement_state);
     NamedCommands.registerCommand("Intake", new InstantCommand(() -> s_Intake.intake()));
     NamedCommands.registerCommand("LauncherOff", new InstantCommand(() -> s_Launcher.Off()));
     NamedCommands.registerCommand("ResetModules", new InstantCommand(() -> s_SwerveDrive.resetToAbsolute()));
@@ -185,8 +158,6 @@ public class RobotContainer {
     driverController.povDown().whileTrue(new InstantCommand(()-> s_SwerveDrive.zero_imu()));
 
     // Launcher
-    // driverController.a().onTrue(new InstantCommand(() -> s_Launcher.RunAmp())).onFalse(new InstantCommand(() -> {s_Launcher.Off(); }, s_Launcher));
-    // driverController.b().onTrue(new InstantCommand(() -> s_Launcher.RunSpeaker())).onFalse(new InstantCommand(() -> {s_Launcher.Off(); }, s_Launcher));
     driverController.a().onTrue(
         new SequentialCommandGroup(
           new InstantCommand(() -> s_Launcher.RunAmp()), 
@@ -214,10 +185,6 @@ public class RobotContainer {
     driverController2.b().onTrue(new InstantCommand(() -> s_Launcher.setSetpoint(2000)));
     driverController2.y().onTrue(new InstantCommand(() -> s_Launcher.setSetpoint(4000)));
     driverController2.x().onTrue(new InstantCommand(() -> s_Launcher.setSetpoint(6000)));
-    // driverController.x().onTrue(new InstantCommand(() -> s_Launcher.RunAmp_SlidesDown())).onFalse(new InstantCommand(() -> {s_Launcher.Off(); }, s_Launcher));
-
-    // driverController.rightTrigger().onTrue(amp).onFalse(off);
-    // driverController.leftTrigger().onTrue(speaker).onFalse(off);
 
     // Intake 
     driverController.rightTrigger().onTrue(new InstantCommand(() -> s_Intake.intake())).onFalse(new InstantCommand(() -> {s_Intake.Off(); }, s_Intake));
@@ -228,14 +195,6 @@ public class RobotContainer {
     // driverController.x().onTrue(new RunCommand(() -> s_Slides.SlidesDown(), s_Slides)).onFalse(new InstantCommand(() -> {s_Slides.SlidesOff(); }, s_Slides));
     driverController.y().onTrue(slides_increment_state).onFalse(new InstantCommand(() -> {s_Slides.SlidesOff(); }, s_Slides));
     driverController.x().onTrue(slides_decrement_state).onFalse(new InstantCommand(() -> {s_Slides.SlidesOff(); }, s_Slides));
-
-    // new InstantCommand(() -> {s_Slides.SlidesOff(); }, s_Slides)
-    // new InstantCommand(() -> {s_Slides.SlidesOff(); }, s_Slides)
-
-    // .onFalse(new InstantCommand(() -> {s_Slides.SlidesOff(); }, s_Slides));
-
-    // driverController.x().onTrue(new InstantCommand(() -> s_Slides.incrementUp()));
-    // driverController.y().onTrue(new InstantCommand(() -> s_Slides.incrementDown()));
 
     // Left Climber
     driverController.leftBumper().onTrue(run_left_climber_up).onFalse(new InstantCommand(() -> {s_Climber.LeftRun(0); }, s_Climber));

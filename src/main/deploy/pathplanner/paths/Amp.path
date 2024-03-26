@@ -8,7 +8,7 @@
       },
       "prevControl": null,
       "nextControl": {
-        "x": 1.1530163342150013,
+        "x": 1.901480871003485,
         "y": 6.921250576645853
       },
       "isLocked": false,
@@ -17,18 +17,24 @@
     {
       "anchor": {
         "x": 1.7997510457786332,
-        "y": 7.739714211925242
+        "y": 6.0
       },
       "prevControl": {
         "x": 1.7997510457786332,
-        "y": 7.000117697975472
+        "y": 6.962926642596857
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": null
+      "linkedName": "Amp"
     }
   ],
-  "rotationTargets": [],
+  "rotationTargets": [
+    {
+      "waypointRelativePos": 0.4,
+      "rotationDegrees": -90.0,
+      "rotateFast": false
+    }
+  ],
   "constraintZones": [],
   "eventMarkers": [],
   "globalConstraints": {
@@ -43,7 +49,7 @@
     "rotateFast": false
   },
   "reversed": false,
-  "folder": null,
+  "folder": "Amp",
   "previewStartingState": {
     "rotation": 0.0,
     "velocity": 0

@@ -3,29 +3,29 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 1.2879723980088535,
-        "y": 5.57998439840296
+        "x": 1.27,
+        "y": 5.57
       },
       "prevControl": null,
       "nextControl": {
-        "x": 2.2879723980088555,
-        "y": 5.57998439840296
+        "x": 2.2700000000000022,
+        "y": 5.57
       },
       "isLocked": false,
-      "linkedName": null
+      "linkedName": "Speaker"
     },
     {
       "anchor": {
         "x": 2.28,
-        "y": 4.077331094381429
+        "y": 4.08
       },
       "prevControl": {
         "x": 0.6641840846738691,
-        "y": 4.077331094381429
+        "y": 4.08
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": null
+      "linkedName": "Right Spike Mark"
     }
   ],
   "rotationTargets": [],
@@ -43,7 +43,7 @@
     "rotateFast": false
   },
   "reversed": false,
-  "folder": null,
+  "folder": "4 Note Auto Paths",
   "previewStartingState": {
     "rotation": 0.0,
     "velocity": 0

@@ -12,20 +12,20 @@
         "y": 4.08
       },
       "isLocked": false,
-      "linkedName": null
+      "linkedName": "Right Spike Mark"
     },
     {
       "anchor": {
         "x": 1.27,
-        "y": 5.58
+        "y": 5.57
       },
       "prevControl": {
         "x": 2.2700000000000005,
-        "y": 5.58
+        "y": 5.57
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": null
+      "linkedName": "Speaker"
     }
   ],
   "rotationTargets": [],
@@ -43,7 +43,7 @@
     "rotateFast": false
   },
   "reversed": false,
-  "folder": null,
+  "folder": "4 Note Auto Paths",
   "previewStartingState": {
     "rotation": 0.0,
     "velocity": 0

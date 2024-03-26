@@ -12,7 +12,7 @@
         "y": 5.57
       },
       "isLocked": false,
-      "linkedName": null
+      "linkedName": "Speaker"
     },
     {
       "anchor": {
@@ -25,7 +25,7 @@
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": null
+      "linkedName": "Middle Spike Mark"
     }
   ],
   "rotationTargets": [],
@@ -43,7 +43,7 @@
     "rotateFast": false
   },
   "reversed": false,
-  "folder": null,
+  "folder": "4 Note Auto Paths",
   "previewStartingState": {
     "rotation": 0.0,
     "velocity": 0
