@@ -219,7 +219,7 @@ public final class Constants {
     public static final double launcher_kFF = 0.0;
 
     // Setpoint Constants
-    public static final double Amp      = 2000;
+    public static final double Amp      = 1800;
     public static final double Speaker  = 6000;
     public static final double Off      = 0;
 

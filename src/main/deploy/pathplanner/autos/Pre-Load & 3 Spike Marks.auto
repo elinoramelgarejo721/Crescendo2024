@@ -2,8 +2,8 @@
   "version": 1.0,
   "startingPose": {
     "position": {
-      "x": 1.29,
-      "y": 5.58
+      "x": 1.25,
+      "y": 5.57
     },
     "rotation": 0.0
   },
@@ -20,7 +20,7 @@
         {
           "type": "wait",
           "data": {
-            "waitTime": 0.25
+            "waitTime": 0.5
           }
         },
         {
@@ -85,6 +85,12 @@
           }
         },
         {
+          "type": "wait",
+          "data": {
+            "waitTime": 2.5
+          }
+        },
+        {
           "type": "path",
           "data": {
             "pathName": "Right Spike Mark Back To Speaker"
@@ -106,6 +112,12 @@
           "type": "named",
           "data": {
             "name": "SpeakerDone"
+          }
+        },
+        {
+          "type": "wait",
+          "data": {
+            "waitTime": 1.5
           }
         },
         {
@@ -158,6 +170,12 @@
           }
         },
         {
+          "type": "wait",
+          "data": {
+            "waitTime": 1.5
+          }
+        },
+        {
           "type": "path",
           "data": {
             "pathName": "Middle Spike Mark Back To Speaker"
@@ -179,6 +197,12 @@
           "type": "named",
           "data": {
             "name": "SpeakerDone"
+          }
+        },
+        {
+          "type": "wait",
+          "data": {
+            "waitTime": 2.5
           }
         },
         {
@@ -231,6 +255,12 @@
           }
         },
         {
+          "type": "wait",
+          "data": {
+            "waitTime": 3.0
+          }
+        },
+        {
           "type": "path",
           "data": {
             "pathName": "Left Spike Mark Back to Speaker"
@@ -240,12 +270,6 @@
           "type": "named",
           "data": {
             "name": "RunSpeaker"
-          }
-        },
-        {
-          "type": "wait",
-          "data": {
-            "waitTime": 1.0
           }
         },
         {

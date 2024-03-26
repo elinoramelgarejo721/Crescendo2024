@@ -110,9 +110,9 @@ public class RobotContainer {
       )
     );
 
-    s_Slides.setDefaultCommand(
-      new DefaultSlides(s_Slides)
-    );
+    // s_Slides.setDefaultCommand(
+    //   new DefaultSlides(s_Slides)
+    // );
 
     // s_Climber.setDefaultCommand(
     //   new DefaultClimbers(s_Climber, s_Climber)
@@ -191,10 +191,10 @@ public class RobotContainer {
     driverController.leftTrigger().onTrue(new InstantCommand(() -> s_Intake.Outtake())).onFalse(new InstantCommand(() -> {s_Intake.Off(); }, s_Intake));
 
     // Slides 
-    // driverController.y().onTrue(new RunCommand(() -> s_Slides.SlidesUp(), s_Slides)).onFalse(new InstantCommand(() -> {s_Slides.SlidesOff(); }, s_Slides));;
-    // driverController.x().onTrue(new RunCommand(() -> s_Slides.SlidesDown(), s_Slides)).onFalse(new InstantCommand(() -> {s_Slides.SlidesOff(); }, s_Slides));
-    driverController.y().onTrue(slides_increment_state).onFalse(new InstantCommand(() -> {s_Slides.SlidesOff(); }, s_Slides));
-    driverController.x().onTrue(slides_decrement_state).onFalse(new InstantCommand(() -> {s_Slides.SlidesOff(); }, s_Slides));
+    driverController.y().onTrue(new RunCommand(() -> s_Slides.SlidesUp(), s_Slides)).onFalse(new InstantCommand(() -> {s_Slides.SlidesOff(); }, s_Slides));;
+    driverController.x().onTrue(new RunCommand(() -> s_Slides.SlidesDown(), s_Slides)).onFalse(new InstantCommand(() -> {s_Slides.SlidesOff(); }, s_Slides));
+    // driverController.y().onTrue(slides_increment_state).onFalse(new InstantCommand(() -> {s_Slides.SlidesOff(); }, s_Slides));
+    // driverController.x().onTrue(slides_decrement_state).onFalse(new InstantCommand(() -> {s_Slides.SlidesOff(); }, s_Slides));
 
     // Left Climber
     driverController.leftBumper().onTrue(run_left_climber_up).onFalse(new InstantCommand(() -> {s_Climber.LeftRun(0); }, s_Climber));
