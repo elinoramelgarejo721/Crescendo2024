@@ -8,8 +8,8 @@
       },
       "prevControl": null,
       "nextControl": {
-        "x": 0.996016109288345,
-        "y": 4.08
+        "x": 2.3,
+        "y": 5.774851770143537
       },
       "isLocked": false,
       "linkedName": "Right Spike Mark"
@@ -20,8 +20,8 @@
         "y": 5.57
       },
       "prevControl": {
-        "x": 2.250000000000001,
-        "y": 5.57
+        "x": 1.6482855267015404,
+        "y": 5.55076982040085
       },
       "nextControl": null,
       "isLocked": false,
