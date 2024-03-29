@@ -11,12 +11,12 @@ import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import edu.wpi.first.math.controller.PIDController;
 
-import frc.robot.lib.util.PIDController;
 import frc.robot.Constants.IntakeConstants;
 import frc.robot.Constants.LauncherConstants;
 
-public class Intake extends SubsystemBase {
+public class Intake2 extends SubsystemBase {
 
   // Left Climber
   private CANSparkMax intake;
@@ -25,7 +25,7 @@ public class Intake extends SubsystemBase {
   private PIDController intakePID;
 
   /** Creates a new ExampleSubsystem. */
-  public Intake() {
+  public Intake2() {
 
     // Left Climber
     this.intake = new CANSparkMax(IntakeConstants.intake_id, MotorType.kBrushless);
@@ -82,22 +82,14 @@ public class Intake extends SubsystemBase {
     // else if (noteIN() == false) {
     //   this.intakePID.setSetpoint(IntakeConstants.intakeSetpoint);
     // }
-    if (getSetpoint() >= 5200) {
-      if (getSetpoint() >= 5500) {
-        intakePID.setSetpoint(IntakeConstants.intakeSetpoint);
-      }
-      else if (getSetpoint() <= 5500) {
-        intakePID.setSetpoint(0);
-      }
-    }
-
   }
 
 
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-    intake.set(intakePID.calculateForPercent(intakeEncoder.getVelocity(), IntakeConstants.max_RPM));
+    // intake.set(intakePID.calculateForPercent(intakeEncoder.getVelocity(), IntakeConstants.max_RPM));
+    intake.set(intakePID.calculate(intakeEncoder.getVelocity(), IntakeConstants.max_RPM));
     SmartDashboard.putNumber("IntakeRPM", intakeEncoder.getVelocity());
   }
 
