@@ -109,7 +109,7 @@ public final class Constants {
 
 
     public static final double angle_kP  = 0.01;
-    public static final double angle_kI  = 0.0;
+    public static final double angle_kI  = 0.000015;
     public static final double angle_kD  = 0.0;
     public static final double angle_kFF = 0.0;
 
@@ -168,7 +168,7 @@ public final class Constants {
   public static class IntakeConstants {
     public static final int intake_id = 10;
 
-    public static final double intake_kp = 0.5;
+    public static final double intake_kp = 0.1;
     public static final double intake_ki = 0.0;
     public static final double intake_kd = 0.0;
 
@@ -180,6 +180,7 @@ public final class Constants {
     public static final double feedToLauncher   = 6000;
     public static final double Off              = 0;
 
+    public static final double INTAKE_STALL_DETECTION = 9.1; // Amps
   }
 
   public static class ClimberConstants {
@@ -290,8 +291,8 @@ public final class Constants {
     public static final double maxModuleSpeed = 4.5;
 
     public static final HolonomicPathFollowerConfig pathFollowerConfig = new HolonomicPathFollowerConfig(
-      new PIDConstants(7.0, 10.0, 3.0), // Translation constants 
-      new PIDConstants(5.0, 1.5, 0.0), // Rotation constants 
+      new PIDConstants(5.0, 0.0, 0.0), // Translation constants 
+      new PIDConstants(5.0, 0.0, 0.0), // Rotation constants 
       maxModuleSpeed, 
       1.04171, // Drive base radius (distance from center to furthest module) 
       new ReplanningConfig()

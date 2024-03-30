@@ -7,6 +7,7 @@ import com.revrobotics.CANSparkBase.IdleMode;
 import com.revrobotics.CANSparkLowLevel.MotorType;
 
 import frc.robot.lib.util.PIDController;
+import edu.wpi.first.math.filter.Debouncer;
 import edu.wpi.first.math.proto.Controller;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;

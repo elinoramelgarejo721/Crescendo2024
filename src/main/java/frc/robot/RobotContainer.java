@@ -188,25 +188,21 @@ public class RobotContainer {
 
     // Intake 
     driverController.rightTrigger()
-      // .onTrue(
-      //   new InstantCommand(() -> s_Intake.intake())
-      // )
       .onTrue(
-        new SequentialCommandGroup(
-          new InstantCommand(() -> {s_Intake.intake(); }, s_Intake),
-          new InstantCommand(() -> {s_Intake.stopIntake(); }, s_Intake)
-        )
+        // s_Intake.intakeNoteCommand()
+        new InstantCommand(() -> {s_Intake.intake(); }, s_Intake)
       )
       .onFalse(
         new InstantCommand(() -> {s_Intake.Off(); }, s_Intake)
-      );
+    );
+
     driverController.leftTrigger()
       .onTrue(
         new InstantCommand(() -> s_Intake.Outtake())
       )
       .onFalse(
         new InstantCommand(() -> {s_Intake.Off(); }, s_Intake)
-      );
+    );
 
     // Slides 
     driverController.y().onTrue(new RunCommand(() -> s_Slides.SlidesUp(), s_Slides)).onFalse(new InstantCommand(() -> {s_Slides.SlidesOff(); }, s_Slides));;
