@@ -2,10 +2,10 @@
   "version": 1.0,
   "startingPose": {
     "position": {
-      "x": 1.25,
+      "x": 2.3,
       "y": 5.57
     },
-    "rotation": 0
+    "rotation": 0.0
   },
   "command": {
     "type": "sequential",
@@ -48,7 +48,7 @@
               {
                 "type": "path",
                 "data": {
-                  "pathName": "Leave & Strafe"
+                  "pathName": "Middle Spike Mark Back To Speaker"
                 }
               },
               {
@@ -67,21 +67,22 @@
           }
         },
         {
-          "type": "named",
-          "data": {
-            "name": "ResetModules"
-          }
-        },
-        {
           "type": "wait",
           "data": {
-            "waitTime": 6.5
+            "waitTime": 5.0
           }
         },
         {
-          "type": "path",
+          "type": "sequential",
           "data": {
-            "pathName": "Middle Spike Mark"
+            "commands": [
+              {
+                "type": "path",
+                "data": {
+                  "pathName": "Middle Spike Mark"
+                }
+              }
+            ]
           }
         }
       ]

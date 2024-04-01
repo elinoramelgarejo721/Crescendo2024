@@ -8,36 +8,20 @@
       },
       "prevControl": null,
       "nextControl": {
-        "x": 1.805689735246852,
-        "y": 4.155215438306727
+        "x": 1.0999999999999999,
+        "y": 4.08
       },
       "isLocked": false,
       "linkedName": "Right Spike Mark"
     },
     {
       "anchor": {
-        "x": 1.5,
-        "y": 4.391924892983831
+        "x": 1.35,
+        "y": 5.57
       },
       "prevControl": {
-        "x": 1.5,
-        "y": 3.9515269975123886
-      },
-      "nextControl": {
-        "x": 1.5,
-        "y": 4.832322788455273
-      },
-      "isLocked": false,
-      "linkedName": null
-    },
-    {
-      "anchor": {
-        "x": 1.5,
-        "y": 5.55
-      },
-      "prevControl": {
-        "x": 1.5,
-        "y": 5.0218204216560975
+        "x": 1.35,
+        "y": 5.041820421656098
       },
       "nextControl": null,
       "isLocked": false,
