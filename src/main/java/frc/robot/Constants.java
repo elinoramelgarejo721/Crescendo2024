@@ -139,13 +139,6 @@ public final class Constants {
       new Translation2d(wheel_base / 2.0, -track_width / 2.0)     // +-
     );
 
-    // public static final SwerveDriveKinematics swerve_kinematics = new SwerveDriveKinematics(
-    //   AutoConstants.flModuleOffset,
-    //   AutoConstants.frModuleOffset,
-    //   AutoConstants.blModuleOffset,
-    //   AutoConstants.brModuleOffset
-    // );
-
     // Took out angle offsets
     public static final SwerveModuleConstants[] module_constants = new SwerveModuleConstants[]{
       new SwerveModuleConstants(DriveConstants.front_left_steer_id, DriveConstants.front_left_drive_id, DriveConstants.front_left_CANcoder_id),
@@ -291,7 +284,7 @@ public final class Constants {
     public static final double maxModuleSpeed = 4.5;
 
     public static final HolonomicPathFollowerConfig pathFollowerConfig = new HolonomicPathFollowerConfig(
-      new PIDConstants(5.0, 0.0, 0.0), // Translation constants 
+      new PIDConstants(10.0, 0.0, 0.0), // Translation constants 
       new PIDConstants(5.0, 0.0, 0.0), // Rotation constants 
       maxModuleSpeed, 
       1.04171, // Drive base radius (distance from center to furthest module) 
