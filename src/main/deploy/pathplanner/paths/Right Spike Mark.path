@@ -8,48 +8,48 @@
       },
       "prevControl": null,
       "nextControl": {
-        "x": 1.6999999999999997,
-        "y": 5.6
+        "x": 1.2937834806867723,
+        "y": 4.879619948350217
       },
       "isLocked": false,
       "linkedName": "Speaker"
     },
     {
       "anchor": {
-        "x": 2.45,
-        "y": 5.6
+        "x": 2.35,
+        "y": 4.08
       },
       "prevControl": {
-        "x": 1.9500000000000002,
-        "y": 5.6
+        "x": 1.6768526309155936,
+        "y": 4.08
       },
       "nextControl": {
-        "x": 2.95,
-        "y": 5.6
+        "x": 2.4,
+        "y": 4.08
       },
       "isLocked": false,
-      "linkedName": "Middle Spike Mark"
+      "linkedName": "Right Spike Mark"
     },
     {
       "anchor": {
-        "x": 1.2,
-        "y": 5.6
+        "x": 1.33,
+        "y": 5.8
       },
       "prevControl": {
-        "x": 1.7,
-        "y": 5.6
+        "x": 2.33,
+        "y": 5.8
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": "Speaker"
+      "linkedName": "Speaker (From the Right)"
     }
   ],
   "rotationTargets": [],
   "constraintZones": [],
   "eventMarkers": [
     {
-      "name": "New Event Marker",
-      "waypointRelativePos": 0.4,
+      "name": "Spike Mark",
+      "waypointRelativePos": 0.85,
       "command": {
         "type": "sequential",
         "data": {
@@ -59,12 +59,6 @@
               "data": {
                 "name": "Intake"
               }
-            },
-            {
-              "type": "named",
-              "data": {
-                "name": "ResetModules"
-              }
             }
           ]
         }
@@ -72,7 +66,7 @@
     },
     {
       "name": "New Event Marker",
-      "waypointRelativePos": 1.05,
+      "waypointRelativePos": 1.2,
       "command": {
         "type": "sequential",
         "data": {
@@ -82,12 +76,6 @@
               "data": {
                 "name": "IntakeOff"
               }
-            },
-            {
-              "type": "named",
-              "data": {
-                "name": "ResetModules"
-              }
             }
           ]
         }
@@ -95,13 +83,13 @@
     }
   ],
   "globalConstraints": {
-    "maxVelocity": 2.0,
+    "maxVelocity": 4.0,
     "maxAcceleration": 3.0,
     "maxAngularVelocity": 540.0,
     "maxAngularAcceleration": 720.0
   },
   "goalEndState": {
-    "velocity": 0,
+    "velocity": 0.0,
     "rotation": 0.0,
     "rotateFast": false
   },
@@ -111,5 +99,5 @@
     "rotation": 0.0,
     "velocity": 0
   },
-  "useDefaultConstraints": false
+  "useDefaultConstraints": true
 }

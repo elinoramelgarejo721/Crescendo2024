@@ -82,20 +82,27 @@ public class Intake extends SubsystemBase {
 
   // Note Detection
   public Command intakeNoteCommand() {
+    
     Debouncer debounce = new Debouncer(1, Debouncer.DebounceType.kRising);
-    return 
-        // set the intake to note intaking speed
-            run(() -> {
-                  this.intake();
-                })
-                // Wait until current spike is detected for more than 1s
-                .until(() -> debounce.calculate(getFilteredCurrent() > INTAKE_STALL_DETECTION))
-        // Stop the motor
-        .finallyDo(
-            (interrupted) -> {
-              System.out.println("ended");
-              this.Off();
-            });
+    
+    return
+
+    // set the intake to note intaking speed
+    run( () -> { this.intake(); } )
+
+    // Wait until current spike is detected for more than 1s
+    .until(() -> debounce.calculate(getFilteredCurrent() > INTAKE_STALL_DETECTION))
+
+    // Stop the motor
+    .finallyDo( (interrupted) -> 
+
+      {
+      System.out.println("ended");
+      this.Off();
+      }
+
+    );
+
   }
 
   public double getCurrent() {

@@ -114,14 +114,14 @@ public class RobotContainer {
     //   new DefaultSlides(s_Slides)
     // );
 
-    // s_Climber.setDefaultCommand(
-    //   new DefaultClimbers(s_Climber, s_Climber)
-    // );
+    s_Climber.setDefaultCommand(
+      new DefaultClimbers(s_Climber, s_Climber)
+    );
 
     // Register Named Commands
     NamedCommands.registerCommand("RunSpeaker", new SequentialCommandGroup(new InstantCommand(() -> s_Launcher.RunSpeaker()), new InstantCommand(() -> s_Intake.feedToLauncher())));
     NamedCommands.registerCommand("RunAmp", new SequentialCommandGroup(new InstantCommand(() -> s_Launcher.RunAmp()), new InstantCommand(() -> s_Intake.feedToLauncher())));
-    NamedCommands.registerCommand("SpeakerDone", new SequentialCommandGroup(new InstantCommand(() -> s_Launcher.Off()), new InstantCommand(() -> s_Intake.Off())));
+    NamedCommands.registerCommand("SpeakerDone", new SequentialCommandGroup(new InstantCommand(() -> s_Launcher.Off()), new InstantCommand(() -> s_Intake.Off()), slides_decrement_state));
     NamedCommands.registerCommand("IntakeOff", new InstantCommand(() -> s_Intake.Off()));
     NamedCommands.registerCommand("SlidesUp", slides_increment_state);
     NamedCommands.registerCommand("SlidesDown", slides_decrement_state);
@@ -168,7 +168,7 @@ public class RobotContainer {
           new InstantCommand(() -> {s_Launcher.Off(); }, s_Launcher), 
           new InstantCommand(() -> {s_Intake.Off(); }, s_Intake)
         )
-      );
+    );
     driverController.b().onTrue(
         new SequentialCommandGroup(
           new InstantCommand(() -> s_Launcher.RunSpeaker()), 
@@ -179,7 +179,7 @@ public class RobotContainer {
           new InstantCommand(() -> {s_Launcher.Off(); }, s_Launcher), 
           new InstantCommand(() -> {s_Intake.Off(); }, s_Intake)
         )
-      );
+    );
 
     driverController2.a().onTrue(new InstantCommand(() -> s_Launcher.setSetpoint(0)));
     driverController2.b().onTrue(new InstantCommand(() -> s_Launcher.setSetpoint(2000)));
@@ -211,16 +211,16 @@ public class RobotContainer {
     // driverController.x().onTrue(slides_decrement_state).onFalse(new InstantCommand(() -> {s_Slides.SlidesOff(); }, s_Slides));
 
     // Left Climber
-    driverController.leftBumper().onTrue(run_left_climber_up).onFalse(new InstantCommand(() -> {s_Climber.LeftRun(0); }, s_Climber));
-    driverController.leftStick().onTrue(run_left_climber_down).onFalse(new InstantCommand(() -> {s_Climber.LeftRun(0); }, s_Climber));
-    // driverController.leftBumper().onTrue(lClimber_increment_state).onFalse(new InstantCommand(() -> {s_Climber.LeftRun(0); }, s_Climber));
-    // driverController.leftStick().onTrue(lClimber_decrement_state).onFalse(new InstantCommand(() -> {s_Climber.LeftRun(0); }, s_Climber));
+    // driverController.leftBumper().onTrue(run_left_climber_up).onFalse(new InstantCommand(() -> {s_Climber.LeftRun(0); }, s_Climber));
+    // driverController.leftStick().onTrue(run_left_climber_down).onFalse(new InstantCommand(() -> {s_Climber.LeftRun(0); }, s_Climber));
+    driverController.leftBumper().onTrue(lClimber_increment_state).onFalse(new InstantCommand(() -> {s_Climber.LeftRun(0); }, s_Climber));
+    driverController.leftStick().onTrue(lClimber_decrement_state).onFalse(new InstantCommand(() -> {s_Climber.LeftRun(0); }, s_Climber));
 
     // Right Climber
-    driverController.rightBumper().onTrue(run_right_climber_up).onFalse(new InstantCommand(() -> {s_Climber.RightRun(0); }, s_Climber));
-    driverController.rightStick().onTrue(run_right_climber_down).onFalse(new InstantCommand(() -> {s_Climber.RightRun(0); }, s_Climber));
-    // driverController.rightBumper().onTrue(rClimber_increment_state).onFalse(new InstantCommand(() -> {s_Climber.RightRun(0); }, s_Climber));
-    // driverController.rightStick().onTrue(rClimber_decrement_state).onFalse(new InstantCommand(() -> {s_Climber.RightRun(0); }, s_Climber));
+    // driverController.rightBumper().onTrue(run_right_climber_up).onFalse(new InstantCommand(() -> {s_Climber.RightRun(0); }, s_Climber));
+    // driverController.rightStick().onTrue(run_right_climber_down).onFalse(new InstantCommand(() -> {s_Climber.RightRun(0); }, s_Climber));
+    driverController.rightBumper().onTrue(rClimber_increment_state).onFalse(new InstantCommand(() -> {s_Climber.RightRun(0); }, s_Climber));
+    driverController.rightStick().onTrue(rClimber_decrement_state).onFalse(new InstantCommand(() -> {s_Climber.RightRun(0); }, s_Climber));
 
   }
 

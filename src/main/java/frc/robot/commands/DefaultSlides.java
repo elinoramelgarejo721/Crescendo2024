@@ -48,6 +48,9 @@ public class DefaultSlides extends Command {
 
       case 1:
         this.slides.runToState(SlidesConstants.position2);
+        // if (this.slides.bottomSwitchHit()) {
+        //   this.slides.SetEncoderPosition(SlidesConstants.position1);
+        // }
         break;
 
       case 2:

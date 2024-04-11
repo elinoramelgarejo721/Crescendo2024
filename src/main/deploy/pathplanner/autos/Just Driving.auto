@@ -18,15 +18,15 @@
           }
         },
         {
-          "type": "path",
+          "type": "wait",
           "data": {
-            "pathName": "Leave & Strafe"
+            "waitTime": 0.2
           }
         },
         {
-          "type": "wait",
+          "type": "path",
           "data": {
-            "waitTime": 2.5
+            "pathName": "Right Spike Mark"
           }
         },
         {
@@ -36,21 +36,9 @@
           }
         },
         {
-          "type": "path",
-          "data": {
-            "pathName": "Right Spike Mark Back To Speaker"
-          }
-        },
-        {
           "type": "wait",
           "data": {
-            "waitTime": 2.0
-          }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": "ResetModules"
+            "waitTime": 0.2
           }
         },
         {
@@ -60,63 +48,21 @@
           }
         },
         {
-          "type": "wait",
-          "data": {
-            "waitTime": 1.5
-          }
-        },
-        {
           "type": "named",
           "data": {
             "name": "ResetModules"
-          }
-        },
-        {
-          "type": "path",
-          "data": {
-            "pathName": "Middle Spike Mark Back To Speaker"
           }
         },
         {
           "type": "wait",
           "data": {
-            "waitTime": 2.5
-          }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": "ResetModules"
+            "waitTime": 0.2
           }
         },
         {
           "type": "path",
           "data": {
-            "pathName": "Speaker to Left Spike Mark"
-          }
-        },
-        {
-          "type": "wait",
-          "data": {
-            "waitTime": 3.0
-          }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": "ResetModules"
-          }
-        },
-        {
-          "type": "path",
-          "data": {
-            "pathName": "Left Spike Mark Back to Speaker"
-          }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": "ResetModules"
+            "pathName": "Left Spike Mark"
           }
         }
       ]

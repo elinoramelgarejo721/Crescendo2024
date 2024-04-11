@@ -2,10 +2,10 @@
   "version": 1.0,
   "startingPose": {
     "position": {
-      "x": 2.3,
+      "x": 1.35,
       "y": 5.57
     },
-    "rotation": 0.0
+    "rotation": 0
   },
   "command": {
     "type": "sequential",
@@ -20,7 +20,37 @@
         {
           "type": "named",
           "data": {
+            "name": "SlidesUp"
+          }
+        },
+        {
+          "type": "wait",
+          "data": {
+            "waitTime": 0.2
+          }
+        },
+        {
+          "type": "named",
+          "data": {
             "name": "RunSpeaker"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "0.5"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "SpeakerDone"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "SlidesDown"
           }
         },
         {
@@ -32,57 +62,13 @@
         {
           "type": "named",
           "data": {
-            "name": "SpeakerDone"
+            "name": "ResetModules"
           }
         },
         {
-          "type": "sequential",
+          "type": "path",
           "data": {
-            "commands": [
-              {
-                "type": "named",
-                "data": {
-                  "name": "Intake"
-                }
-              },
-              {
-                "type": "path",
-                "data": {
-                  "pathName": "Middle Spike Mark Back To Speaker"
-                }
-              },
-              {
-                "type": "wait",
-                "data": {
-                  "waitTime": 0.05
-                }
-              },
-              {
-                "type": "named",
-                "data": {
-                  "name": "IntakeOff"
-                }
-              }
-            ]
-          }
-        },
-        {
-          "type": "wait",
-          "data": {
-            "waitTime": 5.0
-          }
-        },
-        {
-          "type": "sequential",
-          "data": {
-            "commands": [
-              {
-                "type": "path",
-                "data": {
-                  "pathName": "Middle Spike Mark"
-                }
-              }
-            ]
+            "pathName": "Right Spike Mark"
           }
         }
       ]

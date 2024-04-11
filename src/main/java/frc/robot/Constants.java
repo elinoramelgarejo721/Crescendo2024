@@ -99,7 +99,7 @@ public final class Constants {
     public static final IdleMode drive_idle_mode = IdleMode.kBrake;
 
     public static final int angle_smart_current_limit = 20;
-    public static final int drive_smart_current_limit = 80;
+    public static final int drive_smart_current_limit = 110;
 
     /* Drive Motor Conversion Factors */
     public static final double driveConversionPositionFactor =
@@ -284,8 +284,8 @@ public final class Constants {
     public static final double maxModuleSpeed = 4.5;
 
     public static final HolonomicPathFollowerConfig pathFollowerConfig = new HolonomicPathFollowerConfig(
-      new PIDConstants(10.0, 0.0, 0.0), // Translation constants 
-      new PIDConstants(5.0, 0.0, 0.0), // Rotation constants 
+      new PIDConstants(5.0, 15.0, 20.0), // Translation constants 
+      new PIDConstants(5.0, 0.0, 20.0), // Rotation constants 
       maxModuleSpeed, 
       1.04171, // Drive base radius (distance from center to furthest module) 
       new ReplanningConfig()
