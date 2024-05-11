@@ -74,6 +74,7 @@ public final class Constants {
     
   }
 
+  // Swerve Module Constants
   public static class SwerveModuleConstants {
 
     public int angle_motor_id;
@@ -90,6 +91,7 @@ public final class Constants {
 
   }
 
+  // Other Swerve Constants
   public static class SwerveConstants {
     
     public static final boolean angle_invert = false;
@@ -108,11 +110,13 @@ public final class Constants {
     public static final double angleConversionFactor = 360 / DriveConstants.angleGearRatio;
 
 
+    // Angle PID Values
     public static final double angle_kP  = 0.01;
     public static final double angle_kI  = 0.000015;
     public static final double angle_kD  = 0.0;
     public static final double angle_kFF = 0.0;
 
+    // Drive PID Values
     public static final double drive_kP  = 1.0;
     public static final double drive_kI  = 0.0;
     public static final double drive_kD  = 0.0;
@@ -123,8 +127,10 @@ public final class Constants {
     // public static final double driveKV = 2.44;
     // public static final double driveKA = 0.27;
 
+    // Voltage Compensation
     public static final double voltage_comp = 12.0;
 
+    // Math Utilized for Swerve Kinematics
     public static final double wheel_base = Units.inchesToMeters(24.75);
     public static final double track_width = Units.inchesToMeters(24.75);
 
@@ -132,6 +138,7 @@ public final class Constants {
     public static final double maxSpeed = 4.5; // meters per second
     public static final double maxAngularVelocity = 11.5; // 11.5
 
+    // Set the kinematics for the wheels -/+ value show (x, y) for wheel positions
     public static final SwerveDriveKinematics swerve_kinematics = new SwerveDriveKinematics(
       new Translation2d(-wheel_base / 2.0, track_width / 2.0),    // -+
       new Translation2d(-wheel_base / 2.0, -track_width / 2.0),   // --
@@ -139,7 +146,7 @@ public final class Constants {
       new Translation2d(wheel_base / 2.0, -track_width / 2.0)     // +-
     );
 
-    // Took out angle offsets
+    // Took out angle offsets because we zeroed the modules from the CANCoders directly
     public static final SwerveModuleConstants[] module_constants = new SwerveModuleConstants[]{
       new SwerveModuleConstants(DriveConstants.front_left_steer_id, DriveConstants.front_left_drive_id, DriveConstants.front_left_CANcoder_id),
       new SwerveModuleConstants(DriveConstants.front_right_steer_id, DriveConstants.front_right_drive_id, DriveConstants.front_right_CANcoder_id),
@@ -149,22 +156,32 @@ public final class Constants {
 
   }
 
+  // Controller Constants
   public static class ControllerConstants {
 
+    // Driver ID
     public static final int driver_controller_id = 0;
+
+    // Deadband
     public static final double stickDeadband = 0.1;
 
+    // Controller joystick 
     public static final Joystick driver1 = new Joystick(0);
 
   }
 
+  // Intake Constants
   public static class IntakeConstants {
+
+    // Intake Motor Controller ID
     public static final int intake_id = 10;
 
+    // Intake PID Values
     public static final double intake_kp = 0.1;
     public static final double intake_ki = 0.0;
     public static final double intake_kd = 0.0;
 
+    // Max RPM
     public static final double max_RPM      = 5676; //5676
 
     // Setpoint Constants
@@ -177,25 +194,29 @@ public final class Constants {
   }
 
   public static class ClimberConstants {
+
+    // Climber Motor Controller IDs
     public static final int left_climber_id = 9;
     public static final int right_climber_id = 14;
 
+    // Current Limits to preserve voltage
     public static final int left_climber_current_limit  = 40;
     public static final int right_climber_current_limit = 40;
 
+    // Climber PID Constants
     public static final double climbers_kp  = 0.15;
     public static final double climbers_ki  = 0.0;
     public static final double climbers_kd  = 0.0;
     public static final double climbers_kFF = 0.0;
 
-    // Left Climber
+    // Left Climber Positions
 
     public static final double lposition0 = -3;
     public static final double lposition1 = 0;
     public static final double lposition2 = 150;
     public static final double lposition3 = 360;
 
-    // Right Climber
+    // Right Climber Positions
 
     public static final double rposition0 = -3;
     public static final double rposition1 = 0;
@@ -205,8 +226,11 @@ public final class Constants {
   }
 
   public static class LauncherConstants {
+
+    // Launcher Motor Controller IDs
     public static final int launcher_id = 12;
 
+    // Launcher PID Values
     public static final double launcher_kp  = 0.5;
     public static final double launcher_ki  = 0.0;
     public static final double launcher_kd  = 0.0;
@@ -217,19 +241,24 @@ public final class Constants {
     public static final double Speaker  = 6000;
     public static final double Off      = 0;
 
+    // Max RPM for the Motors
     public static final double max_RPM      = 5676; //5676
+
+    // Set the Gear Ratio
     public static final double gear_ratio   = 3;
   }
 
   public static class SlidesConstants {
+
+    // Slides Constants
     public static final int slides_id = 13;
 
-    // Slides
+    // Slides PID Values
     public static final double slides_kp = 1.0; // 0.15
     public static final double slides_ki = 0.0;
     public static final double slides_kd = 0.0;
 
-    // Positions
+    // Slide Positions
     public static final double position1 = -159;
     public static final double position2 = 0; // -140
     public static final double position3 = 74;
@@ -238,6 +267,8 @@ public final class Constants {
   }
 
   public static class AutoConstants {
+
+    // Not being used currently, this is alternative code
 
     // Auto
     public static final Translation2d flModuleOffset = new Translation2d(0.7366, 0.7366);
@@ -281,8 +312,10 @@ public final class Constants {
           new SwerveModuleConstants(angleMotorID, driveMotorID, canCoderID);
     }
 
+    // Max Module Speed
     public static final double maxModuleSpeed = 4.5;
 
+    // Pathplanner Config
     public static final HolonomicPathFollowerConfig pathFollowerConfig = new HolonomicPathFollowerConfig(
       new PIDConstants(10.0, 15.0, 20.0), // Translation constants 
       new PIDConstants(10.0, 20.0, 25.0), // Rotation constants 
