@@ -48,7 +48,7 @@
   "constraintZones": [],
   "eventMarkers": [
     {
-      "name": "New Event Marker",
+      "name": "Drop Intake & Pick Up",
       "waypointRelativePos": 0.5,
       "command": {
         "type": "sequential",
@@ -65,13 +65,19 @@
               "data": {
                 "name": "ResetModules"
               }
+            },
+            {
+              "type": "named",
+              "data": {
+                "name": "SlidesDown"
+              }
             }
           ]
         }
       }
     },
     {
-      "name": "New Event Marker",
+      "name": "Stop Intaking",
       "waypointRelativePos": 1.3,
       "command": {
         "type": "sequential",
@@ -86,7 +92,70 @@
             {
               "type": "named",
               "data": {
+                "name": "SlidesUp"
+              }
+            },
+            {
+              "type": "named",
+              "data": {
                 "name": "ResetModules"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Ready for Speaker",
+      "waypointRelativePos": 1.95,
+      "command": {
+        "type": "sequential",
+        "data": {
+          "commands": [
+            {
+              "type": "named",
+              "data": {
+                "name": "SlidesUp"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Speaker Done",
+      "waypointRelativePos": 0.05,
+      "command": {
+        "type": "sequential",
+        "data": {
+          "commands": [
+            {
+              "type": "named",
+              "data": {
+                "name": "SpeakerDone"
+              }
+            },
+            {
+              "type": "named",
+              "data": {
+                "name": "SlidesDown"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Score",
+      "waypointRelativePos": 1.95,
+      "command": {
+        "type": "sequential",
+        "data": {
+          "commands": [
+            {
+              "type": "named",
+              "data": {
+                "name": "RunSpeaker"
               }
             }
           ]

@@ -66,7 +66,7 @@ public class RobotContainer {
 
   private final SendableChooser<Command> autoChooser;
 
-  /* Commands */
+  /*------------------------Commands-------------------*/
 
   // Reset to Absolute
   InstantCommand reset_to_abs = new InstantCommand(() -> {this.s_SwerveDrive.resetToAbsolute();}, this.s_SwerveDrive);
@@ -100,6 +100,7 @@ public class RobotContainer {
   /** The container for the robot. Contains subsystems, IO devices, and commands. */
   public RobotContainer() {
 
+    // Swerve Default Command (Look at the TeleOp Swerve Command to understand what each section of the function does)
     s_SwerveDrive.setDefaultCommand(
       new TeleOpSwerve(
       s_SwerveDrive, 
@@ -110,18 +111,20 @@ public class RobotContainer {
       )
     );
 
-    // s_Slides.setDefaultCommand(
-    //   new DefaultSlides(s_Slides)
-    // );
+    // Slides Default Command (Used for PID Control)
+    s_Slides.setDefaultCommand(
+      new DefaultSlides(s_Slides)
+    );
 
+    // Climber Default Command (Used for PID Control)
     s_Climber.setDefaultCommand(
       new DefaultClimbers(s_Climber, s_Climber)
     );
 
-    // Register Named Commands
+    // Register Named Commands (Used in Pathplanner for Autonomous Commands)
     NamedCommands.registerCommand("RunSpeaker", new SequentialCommandGroup(new InstantCommand(() -> s_Launcher.RunSpeaker()), new InstantCommand(() -> s_Intake.feedToLauncher())));
     NamedCommands.registerCommand("RunAmp", new SequentialCommandGroup(new InstantCommand(() -> s_Launcher.RunAmp()), new InstantCommand(() -> s_Intake.feedToLauncher())));
-    NamedCommands.registerCommand("SpeakerDone", new SequentialCommandGroup(new InstantCommand(() -> s_Launcher.Off()), new InstantCommand(() -> s_Intake.Off()), slides_decrement_state));
+    NamedCommands.registerCommand("SpeakerDone", new SequentialCommandGroup(new InstantCommand(() -> s_Launcher.Off()), new InstantCommand(() -> s_Intake.Off())));
     NamedCommands.registerCommand("IntakeOff", new InstantCommand(() -> s_Intake.Off()));
     NamedCommands.registerCommand("SlidesUp", slides_increment_state);
     NamedCommands.registerCommand("SlidesDown", slides_decrement_state);
@@ -130,8 +133,10 @@ public class RobotContainer {
     NamedCommands.registerCommand("ResetModules", new InstantCommand(() -> s_SwerveDrive.resetToAbsolute()));
     NamedCommands.registerCommand("ResetPigeon", new InstantCommand(() -> s_SwerveDrive.zero_imu()));
 
+    // Call ConfigureBindings to include your capabilities with your controllers
     configureBindings();
 
+    // Required to use PathPlanner
     autoChooser = AutoBuilder.buildAutoChooser(); // Default auto will be `Commands.none()`
     SmartDashboard.putData("Auto Mode", autoChooser);
 
@@ -181,12 +186,13 @@ public class RobotContainer {
         )
     );
 
+    // driverController2 used for testing, trying to test the launcher's RPM
     driverController2.a().onTrue(new InstantCommand(() -> s_Launcher.setSetpoint(0)));
     driverController2.b().onTrue(new InstantCommand(() -> s_Launcher.setSetpoint(2000)));
     driverController2.y().onTrue(new InstantCommand(() -> s_Launcher.setSetpoint(4000)));
     driverController2.x().onTrue(new InstantCommand(() -> s_Launcher.setSetpoint(6000)));
 
-    // Intake 
+    // Intake Commands
     driverController.rightTrigger()
       .onTrue(
         // s_Intake.intakeNoteCommand()
@@ -204,19 +210,19 @@ public class RobotContainer {
         new InstantCommand(() -> {s_Intake.Off(); }, s_Intake)
     );
 
-    // Slides 
-    driverController.y().onTrue(new RunCommand(() -> s_Slides.SlidesUp(), s_Slides)).onFalse(new InstantCommand(() -> {s_Slides.SlidesOff(); }, s_Slides));;
-    driverController.x().onTrue(new RunCommand(() -> s_Slides.SlidesDown(), s_Slides)).onFalse(new InstantCommand(() -> {s_Slides.SlidesOff(); }, s_Slides));
-    // driverController.y().onTrue(slides_increment_state).onFalse(new InstantCommand(() -> {s_Slides.SlidesOff(); }, s_Slides));
-    // driverController.x().onTrue(slides_decrement_state).onFalse(new InstantCommand(() -> {s_Slides.SlidesOff(); }, s_Slides));
+    // Slides Commands (Top 2 is to be used w/o PID Control, Bottom 2 to be used w/ PID Control) (Look at Slides Subsystem to understand what each function does)
+    // driverController.y().onTrue(new RunCommand(() -> s_Slides.SlidesUp(), s_Slides)).onFalse(new InstantCommand(() -> {s_Slides.SlidesOff(); }, s_Slides));;
+    // driverController.x().onTrue(new RunCommand(() -> s_Slides.SlidesDown(), s_Slides)).onFalse(new InstantCommand(() -> {s_Slides.SlidesOff(); }, s_Slides));
+    driverController.y().onTrue(new InstantCommand(s_Slides::counterUp)).onFalse(new InstantCommand(s_Slides::SlidesOff));
+    driverController.x().onTrue(new InstantCommand(s_Slides::counterDown)).onFalse(new InstantCommand(() -> {s_Slides.SlidesOff(); }, s_Slides));
 
-    // Left Climber
+    // Left Climber Commands (Top 2 is to be used w/o PID Control, Bottom 2 to be used w/ PID Control) (Look at Climber Subsystem to understand what each function does)
     // driverController.leftBumper().onTrue(run_left_climber_up).onFalse(new InstantCommand(() -> {s_Climber.LeftRun(0); }, s_Climber));
     // driverController.leftStick().onTrue(run_left_climber_down).onFalse(new InstantCommand(() -> {s_Climber.LeftRun(0); }, s_Climber));
     driverController.leftBumper().onTrue(lClimber_increment_state).onFalse(new InstantCommand(() -> {s_Climber.LeftRun(0); }, s_Climber));
     driverController.leftStick().onTrue(lClimber_decrement_state).onFalse(new InstantCommand(() -> {s_Climber.LeftRun(0); }, s_Climber));
 
-    // Right Climber
+    // Right Climber Commands (Top 2 is to be used w/o PID Control, Bottom 2 to be used w/ PID Control) (Look at Climber Subsystem to understand what each function does)
     // driverController.rightBumper().onTrue(run_right_climber_up).onFalse(new InstantCommand(() -> {s_Climber.RightRun(0); }, s_Climber));
     // driverController.rightStick().onTrue(run_right_climber_down).onFalse(new InstantCommand(() -> {s_Climber.RightRun(0); }, s_Climber));
     driverController.rightBumper().onTrue(rClimber_increment_state).onFalse(new InstantCommand(() -> {s_Climber.RightRun(0); }, s_Climber));
@@ -231,6 +237,7 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand() {
 
+    // Used to run auto
     return autoChooser.getSelected();
 
   }

@@ -36,9 +36,9 @@
           }
         },
         {
-          "type": "named",
+          "type": "wait",
           "data": {
-            "name": "0.5"
+            "waitTime": 0.5
           }
         },
         {

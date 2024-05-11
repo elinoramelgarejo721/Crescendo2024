@@ -8,6 +8,8 @@ import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Constants.SlidesConstants;
 import frc.robot.subsystems.Launcher;
+
+/* NOT USED IN CURRENT ROBOT CODE */
 public class DefaultLauncher extends Command {
 
   Launcher launcher;

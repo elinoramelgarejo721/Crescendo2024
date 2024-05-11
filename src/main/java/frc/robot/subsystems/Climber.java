@@ -1,12 +1,13 @@
-
 package frc.robot.subsystems;
 
+// REV IMPORTS
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.RelativeEncoder;
 import com.revrobotics.SparkPIDController;
 import com.revrobotics.CANSparkBase.ControlType;
 import com.revrobotics.CANSparkLowLevel.MotorType;
 
+// WPI IMPORTS
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.proto.Controller;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
@@ -15,6 +16,8 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.POVButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
+
+// ROBOT IMPORTS
 import frc.robot.Constants.ClimberConstants;
 import frc.robot.Constants.ControllerConstants;
 import frc.robot.Constants.SlidesConstants;
@@ -39,51 +42,79 @@ public class Climber extends SubsystemBase {
   public Climber() {
 
     // Left Climber
+
+    // ID
     this.leftClimber = new CANSparkMax(ClimberConstants.left_climber_id, MotorType.kBrushless);
+
+    // Inverts the Motor
     this.leftClimber.setInverted(true);
+
+    // Encoder
     this.leftClimbEncoder = leftClimber.getEncoder();
+
+    // Sets the Current Limit
     this.leftClimber.setSmartCurrentLimit(ClimberConstants.left_climber_current_limit);
     this.leftClimber.setSecondaryCurrentLimit(ClimberConstants.left_climber_current_limit);
+
+    // Zeroes the Encoder Position when the robot turns on
     this.leftClimbEncoder.setPosition(0);
+
+    // Sets the values for the PID Controller
     this.left_PID = this.leftClimber.getPIDController();
     this.left_PID.setP(ClimberConstants.climbers_kp);
     this.left_PID.setI(ClimberConstants.climbers_ki);
     this.left_PID.setD(ClimberConstants.climbers_kd);
     this.left_PID.setFF(ClimberConstants.climbers_kFF);
 
+    // Sets the Default Climber State
     this.lclimber_state = 1;
 
+    // Adds the Data to Shuffleboard
     Shuffleboard.getTab("Game").addDouble(
         "Climber" + " LeftPos", () -> leftClimbEncoder.getPosition()
     );
 
     // Right Climber
+
+    // ID
     this.rightClimber = new CANSparkMax(ClimberConstants.right_climber_id, MotorType.kBrushless);
+
+    // Inverts the Motor
     this.rightClimber.setInverted(false);
+
+    // Encoder
     this.rightClimbEncoder = rightClimber.getEncoder();
+
+    // Sets the Current Limit
     this.rightClimber.setSmartCurrentLimit(ClimberConstants.right_climber_current_limit);
     this.rightClimber.setSecondaryCurrentLimit(ClimberConstants.right_climber_current_limit);
+
+    // Zeroes the Encoder Position when the robot turns on
     this.rightClimbEncoder.setPosition(0);
+
+    // Sets the values for the PID Controller
     this.right_PID = this.rightClimber.getPIDController();
     this.right_PID.setP(ClimberConstants.climbers_kp);
     this.right_PID.setI(ClimberConstants.climbers_ki);
     this.right_PID.setD(ClimberConstants.climbers_kd);
     this.right_PID.setFF(ClimberConstants.climbers_kFF);
 
+    // Sets the Default Climber State
     this.rclimber_state = 1;
 
+    // Adds the Data to Shuffleboard
     Shuffleboard.getTab("Game").addDouble(
         "Climber" + " RightPos", () -> rightClimbEncoder.getPosition()
     );
     
   }
 
-  // Left Climber
+  // Left Climber Run Function
   public void LeftRun(double speed) {
     leftClimber.set(speed);
   }
 
-  // Right Climber
+  // Right Climber Run Function
   public void RightRun(double speed) {
     rightClimber.set(speed);
   }

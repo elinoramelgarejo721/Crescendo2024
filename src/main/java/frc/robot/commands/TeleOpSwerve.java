@@ -13,16 +13,21 @@ import frc.robot.Constants.ControllerConstants;
 import frc.robot.Constants.SwerveConstants;
 
 public class TeleOpSwerve extends Command {
+  // Calls the Swerve Drive Subsystem
   private SwerveDrive s_Swerve;
+
+  // Suppliers used for robot movement
   private DoubleSupplier translationSup;
   private DoubleSupplier strafeSup;
   private DoubleSupplier rotationSup;
   private BooleanSupplier robotCentricSup;
 
+  // SlewRateLimiter - a filter that caps the maximum rate-of-change of the signal.
   private SlewRateLimiter translationLimiter = new SlewRateLimiter(3.0);
   private SlewRateLimiter strafeLimiter      = new SlewRateLimiter(3.0);
   private SlewRateLimiter rotationLimiter    = new SlewRateLimiter(3.0);
 
+  // Makes the TeleOpSwerve function
   public TeleOpSwerve(
       SwerveDrive s_Swerve,
       DoubleSupplier translationSup,
@@ -32,6 +37,7 @@ public class TeleOpSwerve extends Command {
     this.s_Swerve = s_Swerve;
     addRequirements(this.s_Swerve);
 
+    // Translation Supplier
     this.translationSup = translationSup;
     this.strafeSup = strafeSup;
     this.rotationSup = rotationSup;

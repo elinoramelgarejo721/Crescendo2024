@@ -11,6 +11,7 @@ import frc.robot.subsystems.Climber;
 
 public class DefaultClimbers extends Command {
 
+  // Call Climbers from Subsystem Class
   Climber leftClimber;
   Climber rightClimber;
 
@@ -33,6 +34,7 @@ public class DefaultClimbers extends Command {
   @Override
   public void execute() {
 
+    // State Machine to be able to move the climbers up and down
     switch(this.leftClimber.lgetState()) {
 
       case 0:
@@ -56,6 +58,7 @@ public class DefaultClimbers extends Command {
 
     }
 
+    // State Machine to be able to move the climbers up and down
     switch(this.rightClimber.rgetState()) {
 
       case 0:

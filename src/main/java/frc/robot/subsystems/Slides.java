@@ -8,6 +8,7 @@ import com.revrobotics.CANSparkLowLevel.MotorType;
 import com.revrobotics.SparkPIDController;
 import com.revrobotics.CANSparkBase.ControlType;
 
+import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.proto.Controller;
 import edu.wpi.first.math.util.Units;
@@ -40,9 +41,10 @@ public class Slides extends SubsystemBase {
 
     // Slides Config
     this.slides = new CANSparkMax(SlidesConstants.slides_id, MotorType.kBrushless);
-    this.slidesEncoder = this.slides.getAlternateEncoder(8192);
+    this.slidesEncoder = this.slides.getEncoder();
     this.slidesEncoder.setPosition(0);
     this.slidesPID = this.slides.getPIDController();
+    slidesPID.setFeedbackDevice(slidesEncoder);
     this.slidesPID.setFF(0);
     this.slidesPID.setP(SlidesConstants.slides_kp);
     this.slidesPID.setI(SlidesConstants.slides_ki);
@@ -70,22 +72,22 @@ public class Slides extends SubsystemBase {
 
   // Slides
   public void SlidesUp() {
-      if (toplimitSwitch.get() == false) {
+      if (toplimitSwitch.get() == true) {
           // Limit switch not tripped
           slides.set(0.4);
       } 
-        else if(bottomlimitSwitch.get() == true){
+        else if(toplimitSwitch.get() == false){
           // Limit Switch Tripped
           slides.set(0);
     }
   }
 
   public boolean topSwitchHit() {
-    return toplimitSwitch.get() == true;
+    return toplimitSwitch.get() == false;
   }
 
   public boolean topSwitchNotHit() {
-    return toplimitSwitch.get() == false;
+    return toplimitSwitch.get() == true;
   }
 
   public void SlidesDown() {
@@ -108,6 +110,8 @@ public class Slides extends SubsystemBase {
   }
 
   public void SlidesOff() {
+        System.out.println("baddd: "+this.slides_state);
+
     slides.set(0);
   }
 
@@ -128,15 +132,13 @@ public class Slides extends SubsystemBase {
   }
 
   public void counterUp() {
-    if (this.slides_state == 2)
-      return;
-    this.slides_state++;
+    this.slides_state=MathUtil.clamp(++this.slides_state,0,2);
+    System.out.println("Swichhhh: "+this.slides_state);
   }
 
   public void counterDown() {
-    if (this.slides_state == 0)
-      return;
-    this.slides_state--;
+      this.slides_state=MathUtil.clamp(--this.slides_state,0,2);
+
   }
 
   public boolean getBottomLimitSwitch() {

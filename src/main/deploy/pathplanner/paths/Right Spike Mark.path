@@ -48,12 +48,18 @@
   "constraintZones": [],
   "eventMarkers": [
     {
-      "name": "Spike Mark",
+      "name": "Pick Up the Note",
       "waypointRelativePos": 0.85,
       "command": {
         "type": "sequential",
         "data": {
           "commands": [
+            {
+              "type": "named",
+              "data": {
+                "name": "SlidesDown"
+              }
+            },
             {
               "type": "named",
               "data": {
@@ -65,7 +71,7 @@
       }
     },
     {
-      "name": "New Event Marker",
+      "name": "Stop the Intake",
       "waypointRelativePos": 1.2,
       "command": {
         "type": "sequential",
@@ -75,6 +81,46 @@
               "type": "named",
               "data": {
                 "name": "IntakeOff"
+              }
+            },
+            {
+              "type": "named",
+              "data": {
+                "name": "SlidesUp"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Ready for Speaker",
+      "waypointRelativePos": 1.9,
+      "command": {
+        "type": "sequential",
+        "data": {
+          "commands": [
+            {
+              "type": "named",
+              "data": {
+                "name": "SlidesUp"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Score",
+      "waypointRelativePos": 1.95,
+      "command": {
+        "type": "sequential",
+        "data": {
+          "commands": [
+            {
+              "type": "named",
+              "data": {
+                "name": "RunSpeaker"
               }
             }
           ]

@@ -37,6 +37,9 @@ public class DefaultSlides extends Command {
 
     switch(this.slides.getState()) {
 
+      /* SLIDES STATES */
+
+      // if the bottom limit switch is hit, it tells the encoder that it's at position 1 (Makes sure it doesn't drive over the limit)
       case 0:
         if (this.slides.bottomSwitchNotHit()){
           this.slides.runToState(SlidesConstants.position1);
@@ -46,6 +49,7 @@ public class DefaultSlides extends Command {
         } 
         break;
 
+      // Runs to the starting position (Middle of the Elevator)
       case 1:
         this.slides.runToState(SlidesConstants.position2);
         // if (this.slides.bottomSwitchHit()) {
@@ -53,6 +57,7 @@ public class DefaultSlides extends Command {
         // }
         break;
 
+      // if the top limit switch is hit, it tells the encoder that it's at position 2 (Makes sure it doesn't drive over the limit)
       case 2:
         if (this.slides.topSwitchNotHit()) {
           this.slides.runToState(SlidesConstants.position3);
@@ -63,7 +68,7 @@ public class DefaultSlides extends Command {
         break;
 
       default:
-        break;
+      break;
 
     }
 

@@ -4,6 +4,8 @@ package frc.robot.lib.util;
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
+/* THIS IS A CUSTOM PID CONTROLLER MADE BY DEGREES OF FREEDOM */
+
 /** Custom DOF PID Control Solution */
 public class PIDController {
   private double kP = 1.0;
