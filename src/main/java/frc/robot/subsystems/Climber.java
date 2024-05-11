@@ -24,6 +24,8 @@ import frc.robot.Constants.SlidesConstants;
 
 public class Climber extends SubsystemBase {
 
+ /* ----- Declares Motors & PID Controllers ----- */
+
   // Left Climber
   private CANSparkMax leftClimber;
   private RelativeEncoder leftClimbEncoder;
@@ -38,7 +40,7 @@ public class Climber extends SubsystemBase {
 
   private int rclimber_state;
 
-  /** Creates a new ExampleSubsystem. */
+  /* Creates a new ExampleSubsystem. */
   public Climber() {
 
     // Left Climber
@@ -119,23 +121,28 @@ public class Climber extends SubsystemBase {
     rightClimber.set(speed);
   }
 
-  // PID Climber
+  // PID Commands for the Climbers
   
-  /* Left Climber */
+  /* --------- Left Climber --------- */
+
+  // run to desired state
   public void lrunToState(double target) {
     this.left_PID.setReference(target, ControlType.kPosition);
   }
 
+  // get the state
   public int lgetState() {
     return this.lclimber_state;
   }
 
+  // incremental counter for the states
   public void lcounterUp() {
     if (this.lclimber_state == 3)
       return;
     this.lclimber_state++;
   }
 
+  // decremental counter for the states
   public void lcounterDown() {
     if (this.lclimber_state == 0)
       return;
@@ -143,20 +150,25 @@ public class Climber extends SubsystemBase {
   }
 
   /* Right Climber */
+
+  // run to desired state
   public void rrunToState(double target) {
     this.right_PID.setReference(target, ControlType.kPosition);
   }
 
+  // get the state
   public int rgetState() {
     return this.rclimber_state;
   }
 
+  // incremental counter for the states
   public void rcounterUp() {
     if (this.rclimber_state == 3)
       return;
     this.rclimber_state++;
   }
 
+  // decremental counter for the states
   public void rcounterDown() {
     if (this.rclimber_state == 0)
       return;

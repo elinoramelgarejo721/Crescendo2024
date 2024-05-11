@@ -1,5 +1,9 @@
 package frc.robot.Vision;
 
+/* ------- Class Taken from Limelight Resources ------- */
+
+/* Need to Research Implementations */
+
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;

@@ -1,5 +1,8 @@
 //LimelightHelpers v1.3.0 (Feb 24, 2024)
 
+/* ------- Class Taken from Limelight Resources ------- */
+
+/* Need to Research Implementations */
 package frc.robot.Vision;
 
 import edu.wpi.first.networktables.NetworkTable;
