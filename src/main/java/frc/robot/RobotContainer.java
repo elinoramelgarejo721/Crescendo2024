@@ -25,13 +25,13 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 
 // Pathplanner
-import com.pathplanner.lib.auto.AutoBuilder;
-import com.pathplanner.lib.auto.NamedCommands;
-import com.pathplanner.lib.commands.PathPlannerAuto;
-import com.pathplanner.lib.path.GoalEndState;
-import com.pathplanner.lib.path.PathConstraints;
-import com.pathplanner.lib.path.PathPlannerPath;
-import com.pathplanner.lib.auto.CommandUtil;
+// import com.pathplanner.lib.auto.AutoBuilder;
+// import com.pathplanner.lib.auto.NamedCommands;
+// import com.pathplanner.lib.commands.PathPlannerAuto;
+// import com.pathplanner.lib.path.GoalEndState;
+// import com.pathplanner.lib.path.PathConstraints;
+// import com.pathplanner.lib.path.PathPlannerPath;
+// import com.pathplanner.lib.auto.CommandUtil;
 
 // Subsystems
 import frc.robot.subsystems.SwerveDrive;
@@ -64,7 +64,7 @@ public class RobotContainer {
   private final Launcher       s_Launcher   = new Launcher();
   private final Slides           s_Slides   = new Slides();
 
-  private final SendableChooser<Command> autoChooser;
+  // private final SendableChooser<Command> autoChooser;
 
   /*------------------------Commands-------------------*/
 
@@ -122,23 +122,23 @@ public class RobotContainer {
     );
 
     // Register Named Commands (Used in Pathplanner for Autonomous Commands)
-    NamedCommands.registerCommand("RunSpeaker", new SequentialCommandGroup(new InstantCommand(() -> s_Launcher.RunSpeaker()), new InstantCommand(() -> s_Intake.feedToLauncher())));
-    NamedCommands.registerCommand("RunAmp", new SequentialCommandGroup(new InstantCommand(() -> s_Launcher.RunAmp()), new InstantCommand(() -> s_Intake.feedToLauncher())));
-    NamedCommands.registerCommand("SpeakerDone", new SequentialCommandGroup(new InstantCommand(() -> s_Launcher.Off()), new InstantCommand(() -> s_Intake.Off())));
-    NamedCommands.registerCommand("IntakeOff", new InstantCommand(() -> s_Intake.Off()));
-    NamedCommands.registerCommand("SlidesUp", slides_increment_state);
-    NamedCommands.registerCommand("SlidesDown", slides_decrement_state);
-    NamedCommands.registerCommand("Intake", new InstantCommand(() -> s_Intake.intake()));
-    NamedCommands.registerCommand("LauncherOff", new InstantCommand(() -> s_Launcher.Off()));
-    NamedCommands.registerCommand("ResetModules", new InstantCommand(() -> s_SwerveDrive.resetToAbsolute()));
-    NamedCommands.registerCommand("ResetPigeon", new InstantCommand(() -> s_SwerveDrive.zero_imu()));
+    // NamedCommands.registerCommand("RunSpeaker", new SequentialCommandGroup(new InstantCommand(() -> s_Launcher.RunSpeaker()), new InstantCommand(() -> s_Intake.feedToLauncher())));
+    // NamedCommands.registerCommand("RunAmp", new SequentialCommandGroup(new InstantCommand(() -> s_Launcher.RunAmp()), new InstantCommand(() -> s_Intake.feedToLauncher())));
+    // NamedCommands.registerCommand("SpeakerDone", new SequentialCommandGroup(new InstantCommand(() -> s_Launcher.Off()), new InstantCommand(() -> s_Intake.Off())));
+    // NamedCommands.registerCommand("IntakeOff", new InstantCommand(() -> s_Intake.Off()));
+    // NamedCommands.registerCommand("SlidesUp", slides_increment_state);
+    // NamedCommands.registerCommand("SlidesDown", slides_decrement_state);
+    // NamedCommands.registerCommand("Intake", new InstantCommand(() -> s_Intake.intake()));
+    // NamedCommands.registerCommand("LauncherOff", new InstantCommand(() -> s_Launcher.Off()));
+    // NamedCommands.registerCommand("ResetModules", new InstantCommand(() -> s_SwerveDrive.resetToAbsolute()));
+    // NamedCommands.registerCommand("ResetPigeon", new InstantCommand(() -> s_SwerveDrive.zero_imu()));
 
     // Call ConfigureBindings to include your capabilities with your controllers
     configureBindings();
 
     // Required to use PathPlanner
-    autoChooser = AutoBuilder.buildAutoChooser(); // Default auto will be `Commands.none()`
-    SmartDashboard.putData("Auto Mode", autoChooser);
+    // autoChooser = AutoBuilder.buildAutoChooser(); // Default auto will be `Commands.none()`
+    // SmartDashboard.putData("Auto Mode", autoChooser);
 
   }
 
@@ -247,10 +247,10 @@ public class RobotContainer {
    *
    * @return the command to run in autonomous
    */
-  public Command getAutonomousCommand() {
+  // public Command getAutonomousCommand() {
 
-    // Used to run auto
-    return autoChooser.getSelected();
+  //   // Used to run auto
+  //   // return autoChooser.getSelected();
 
-  }
+  // }
 }

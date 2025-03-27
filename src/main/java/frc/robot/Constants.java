@@ -21,9 +21,9 @@ import java.util.*;
 
 // Pheonix imports
 import com.ctre.phoenix6.hardware.CANcoder;
-import com.pathplanner.lib.util.HolonomicPathFollowerConfig;
-import com.pathplanner.lib.util.PIDConstants;
-import com.pathplanner.lib.util.ReplanningConfig;
+// import com.pathplanner.lib.util.HolonomicPathFollowerConfig;
+// import com.pathplanner.lib.util.PIDConstants;
+// import com.pathplanner.lib.util.ReplanningConfig;
 
 /**
  * The Constants class provides a convenient place for teams to hold robot-wide numerical or boolean
@@ -316,13 +316,13 @@ public final class Constants {
     public static final double maxModuleSpeed = 4.5;
 
     // Pathplanner Config
-    public static final HolonomicPathFollowerConfig pathFollowerConfig = new HolonomicPathFollowerConfig(
-      new PIDConstants(10.0, 15.0, 20.0), // Translation constants 
-      new PIDConstants(10.0, 20.0, 25.0), // Rotation constants 
-      maxModuleSpeed, 
-      1.04171, // Drive base radius (distance from center to furthest module) 
-      new ReplanningConfig()
-    );
+    // public static final HolonomicPathFollowerConfig pathFollowerConfig = new HolonomicPathFollowerConfig(
+    //   new PIDConstants(10.0, 15.0, 20.0), // Translation constants 
+    //   new PIDConstants(10.0, 20.0, 25.0), // Rotation constants 
+    //   maxModuleSpeed, 
+    //   1.04171, // Drive base radius (distance from center to furthest module) 
+    //   new ReplanningConfig()
+    // );
 
   }
 
